@@ -187,7 +187,7 @@ export const TestimonialsSection = () => {
         {/* 3D карусель отзывов */}
         <div 
           ref={carouselRef}
-          className="relative mx-auto max-w-6xl perspective-1000 mb-12"
+          className="relative mx-auto max-w-7xl perspective-1000 mb-12"
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
           onMouseEnter={handleMouseEnter}
@@ -209,10 +209,10 @@ export const TestimonialsSection = () => {
                 transition={{ duration: 0.7, ease: "easeOut" }}
                 className="relative"
               >
-                <div 
-                  className="grid grid-cols-1 lg:grid-cols-12 gap-8 bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden border border-gray-100 dark:border-gray-700"
-                  style={{ background: getGradientBackground(testimonials[activeIndex].color) }}
-                >
+               <div 
+  className="grid grid-cols-1 lg:grid-cols-12 gap-8 bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden border border-gray-100 dark:border-gray-700"
+  style={{ background: getGradientBackground(testimonials[activeIndex].color) }}
+>
                   {/* Левая колонка с информацией о компании */}
                   <div className="lg:col-span-4 relative overflow-hidden bg-white dark:bg-gray-800 p-8 flex flex-col">
                     {/* Фоновый элемент */}
