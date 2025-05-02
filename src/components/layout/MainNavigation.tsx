@@ -101,7 +101,7 @@ export default function MainNavigation() {
                 <span className="text-white font-bold">Λ</span>
               </div>
               <span className="font-bold text-xl text-primary dark:text-primary-light">
-                YourBrand
+                Лого
               </span>
             </Link>
 

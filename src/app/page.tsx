@@ -206,7 +206,7 @@ export default function Home() {
       <ProcessDemoSection />
       <IntegrationsSection />
       <TestimonialsSection />
-      {/* <FaqSection/>  */}
+      <FaqSection/> 
     </div>
   );
 }
