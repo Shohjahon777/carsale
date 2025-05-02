@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import {  motion } from 'framer-motion';
 import * as d3 from 'd3';
-import { AnimatedCounter } from "./AnimatedCounter";
+import { AnimatedCounter } from "./AnimatedCounter.jsx";
 
 export const BenefitsSection = ({ benefits }) => {
   const graphRef = useRef(null);

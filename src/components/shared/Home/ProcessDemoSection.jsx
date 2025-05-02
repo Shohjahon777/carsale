@@ -1,17 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 'use client';
 
 import { useRef, useState, useEffect } from "react";
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 import * as d3 from 'd3';
-
-interface StepProps {
-  title: string;
-  description: string;
-  icon: string;
-  features: string[];
-  benefits: string[];
-  visualization: string;
-}
 
 export const ProcessDemoSection = () => {
   const [activeStep, setActiveStep] = useState(0);
@@ -22,7 +14,7 @@ export const ProcessDemoSection = () => {
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   
   // Более интересные и детализированные шаги
-  const steps: StepProps[] = [
+  const steps = [
     {
       title: "Импорт автомобилей",
       description: "Автоматическое добавление автомобилей из различных источников с полной технической информацией",
@@ -874,7 +866,7 @@ export const ProcessDemoSection = () => {
       .attr("opacity", 0);
   };
   
-  const handleStepClick = (index: number) => {
+  const handleStepClick = (index) => {
     setActiveStep(index);
     // Останавливаем автоматическое переключение на более длительное время
     setIsPlaying(false);

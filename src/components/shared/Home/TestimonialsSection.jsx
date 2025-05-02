@@ -210,9 +210,8 @@ export const TestimonialsSection = () => {
                 className="relative"
               >
                 <div 
-                  className="grid grid-cols-1 lg:grid-cols-12 gap-8"
+                  className="grid grid-cols-1 lg:grid-cols-12 gap-8 bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden border border-gray-100 dark:border-gray-700"
                   style={{ background: getGradientBackground(testimonials[activeIndex].color) }}
-                  className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden border border-gray-100 dark:border-gray-700"
                 >
                   {/* Левая колонка с информацией о компании */}
                   <div className="lg:col-span-4 relative overflow-hidden bg-white dark:bg-gray-800 p-8 flex flex-col">

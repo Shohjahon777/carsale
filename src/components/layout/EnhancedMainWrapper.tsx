@@ -1,4 +1,3 @@
-// src/components/layout/EnhancedMainWrapper.tsx
 'use client';
 
 import { ReactNode, useRef, useEffect, useState } from 'react';
@@ -6,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import TelegramWebAppInitializer from './TelegramWebAppInitializer';
 import MainNavigation from './MainNavigation';
 import { useThemeStore } from '../../store/theme';
+import CustomCursor from '../ui/CustomCursor';
 
 interface EnhancedMainWrapperProps {
   children: ReactNode;
@@ -136,6 +136,9 @@ export default function EnhancedMainWrapper({ children }: EnhancedMainWrapperPro
             </div>
           </div>
         )}
+        
+        {/* Добавляем компонент кастомного курсора */}
+        <CustomCursor />
       </main>
     </div>
   );

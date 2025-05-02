@@ -9,14 +9,11 @@ import {  motion } from 'framer-motion';
 import { TestimonialsSection } from '../components/shared/Home/TestimonialsSection';
 import { FaqSection } from '../components/shared/Home/FaqSection';
 import { pageLocalization } from '../components/shared/Home/localization';
-import { CtaSection } from '../components/shared/Home/CtaSection';
-import { BenefitsSection } from '../components/shared/Home/BenefitsSection';
 import { FeaturesSection } from '../components/shared/Home/FeaturesSection';
+import { BenefitsSection } from '../components/shared/Home/BenefitsSection';
+import { CtaSection } from '../components/shared/Home/CtaSection';
 import { ProcessDemoSection } from '../components/shared/Home/ProcessDemoSection';
 import { IntegrationsSection } from '../components/shared/Home/IntegrationsSection';
-
-
-
 
 
 export default function Home() {

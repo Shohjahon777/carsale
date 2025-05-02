@@ -4,14 +4,6 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 import * as d3 from 'd3';
 
-interface Integration {
-  name: string;
-  icon: string;
-  category: string;
-  description: string;
-  popularityScore: number;
-  logo?: string;
-}
 
 export const IntegrationsSection = () => {
   const [filter, setFilter] = useState('all');
@@ -23,7 +15,7 @@ export const IntegrationsSection = () => {
   const chartRef = useRef(null);
   
   // Расширенный список интеграций с дополнительной информацией
-  const integrations: Integration[] = [
+  const integrations = [
     { 
       name: "1C", 
       icon: "💼", 
@@ -273,7 +265,7 @@ export const IntegrationsSection = () => {
     }
   }, [isInView, filter]);
   
-  const openIntegrationDetails = (integration: Integration) => {
+  const openIntegrationDetails = (integration) => {
     setSelectedIntegration(integration);
   };
   

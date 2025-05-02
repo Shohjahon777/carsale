@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "ES2017",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -19,9 +23,27 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"]
+      "@/*": [
+        "./*"
+      ]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "src/components/shared/Home/AnimatedCounter.jsx",
+    "src/components/shared/Home/BenefitsSection.jsx",
+    "src/components/shared/Home/CircularIndicator.jsx",
+    "src/components/shared/Home/CtaSection.jsx",
+    "src/components/shared/Home/FaqSection.jsx",
+    "src/components/shared/Home/FeaturesSection.jsx",
+    "src/components/shared/Home/IntegrationsSection.jsx",
+    "src/components/shared/Home/ProcessDemoSection.jsx",
+    "src/components/shared/Home/TestimonialsSection.jsx"
+, "src/components/ui/CustomCursor.jsx", "next.config.js"  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

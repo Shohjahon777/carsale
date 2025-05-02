@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import {  motion, useAnimation, useInView } from 'framer-motion';
-import { AnimatedCounter } from "./AnimatedCounter";
+import { AnimatedCounter } from "./AnimatedCounter.jsx";
 import { CircularIndicator } from "./CircularIndicator";
 
 
