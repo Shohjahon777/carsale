@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import {  motion } from 'framer-motion';
+import * as d3 from 'd3';
 
 export const CtaSection = ({ ctaSection, onCtaClick }) => {
   const sectionRef = useRef(null);

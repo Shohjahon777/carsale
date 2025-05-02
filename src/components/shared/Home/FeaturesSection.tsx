@@ -5,6 +5,7 @@ import {  motion, useAnimation, useInView } from 'framer-motion';
 import { AnimatedCounter } from "./AnimatedCounter";
 import { CircularIndicator } from "./CircularIndicator";
 
+
 export const FeaturesSection = ({ features, title }) => {
   const controls = useAnimation();
   const ref = useRef(null);

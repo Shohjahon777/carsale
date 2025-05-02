@@ -13,102 +13,10 @@ import { CtaSection } from '../components/shared/Home/CtaSection';
 import { BenefitsSection } from '../components/shared/Home/BenefitsSection';
 import { FeaturesSection } from '../components/shared/Home/FeaturesSection';
 import { ProcessDemoSection } from '../components/shared/Home/ProcessDemoSection';
+import { IntegrationsSection } from '../components/shared/Home/IntegrationsSection';
 
 
-const IntegrationsSection = () => {
-  const integrations = [
-    { name: "1C", icon: "💼", category: "Учет" },
-    { name: "Битрикс24", icon: "🔄", category: "CRM" },
-    { name: "SAP", icon: "🏢", category: "ERP" },
-    { name: "AmoCRM", icon: "📊", category: "CRM" },
-    { name: "МойСклад", icon: "📦", category: "Склад" },
-    { name: "СБИС", icon: "📝", category: "Документы" },
-    { name: "Telegram", icon: "📱", category: "Мессенджеры" },
-    { name: "WhatsApp", icon: "💬", category: "Мессенджеры" },
-  ];
-  
-  const [filter, setFilter] = useState('all');
-  const categories = ['all', ...new Set(integrations.map(i => i.category))];
-  
-  const filteredIntegrations = filter === 'all' 
-    ? integrations 
-    : integrations.filter(i => i.category === filter);
-  
-  return (
-    <section className="py-20 px-4 bg-gray-50 dark:bg-gray-900/50">
-      <div className="container mx-auto">
-        <motion.div 
-          className="text-center mb-12"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-        >
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-            Интеграции
-          </h2>
-          <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            Наша система легко интегрируется с популярными бизнес-приложениями и сервисами
-          </p>
-        </motion.div>
-        
-        {/* Фильтры */}
-        <div className="flex flex-wrap justify-center gap-2 mb-8">
-          {categories.map(category => (
-            <button
-              key={category}
-              onClick={() => setFilter(category)}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                filter === category 
-                  ? 'bg-primary text-white' 
-                  : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
-              }`}
-            >
-              {category === 'all' ? 'Все' : category}
-            </button>
-          ))}
-        </div>
-        
-        {/* Сетка интеграций */}
-        <motion.div 
-          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4"
-          layout
-        >
-          {filteredIntegrations.map((integration, index) => (
-            <motion.div
-              key={integration.name}
-              layout
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.8 }}
-              transition={{ duration: 0.3, delay: index * 0.05 }}
-              className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-md hover:shadow-lg transition-shadow flex flex-col items-center justify-center text-center h-40"
-            >
-              <div className="text-4xl mb-3">{integration.icon}</div>
-              <h3 className="font-bold text-gray-900 dark:text-white mb-1">{integration.name}</h3>
-              <span className="text-xs text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded-full">
-                {integration.category}
-              </span>
-            </motion.div>
-          ))}
-        </motion.div>
-        
-        {/* CTA */}
-        <div className="text-center mt-10">
-          <p className="text-gray-600 dark:text-gray-300 mb-4">
-            Не нашли нужную интеграцию? Мы можем разработать её специально для вас
-          </p>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="px-6 py-3 bg-primary hover:bg-primary-dark text-white font-medium rounded-full transition-colors shadow-md"
-          >
-            Запросить интеграцию
-          </motion.button>
-        </div>
-      </div>
-    </section>
-  );
-};
+
 
 
 export default function Home() {
@@ -283,13 +191,11 @@ export default function Home() {
         </div>
       </section>
       
-      {/* Секция возможностей с анимацией */}
       <FeaturesSection
         features={t.features.list} 
         title={t.features.title}
       />
       
-      {/* Секция преимуществ с D3 графиками */}
       <BenefitsSection benefits={t.benefits} />
       
       <CtaSection
@@ -300,7 +206,7 @@ export default function Home() {
       <ProcessDemoSection />
       <IntegrationsSection />
       <TestimonialsSection />
-      <FaqSection/>
+      {/* <FaqSection/>  */}
     </div>
   );
 }

@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from "react";
+import * as d3 from 'd3';
 
 export const AnimatedCounter = ({ value, suffix = '', duration = 2000 }) => {
   const counterRef = useRef(null);
