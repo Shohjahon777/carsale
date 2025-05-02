@@ -9,15 +9,33 @@ interface ThemeState {
     isDark: boolean
     setMode: (mode: ThemeMode) => void
     setIsDark: (isDark: boolean) => void
+    toggleTheme: () => void
 }
 
 export const useThemeStore = create<ThemeState>()(
     persist(
-        (set) => ({
+        (set, get) => ({
             mode: 'system',
             isDark: false, // Значение по умолчанию, будет обновлено при инициализации
             setMode: (mode: ThemeMode) => set({ mode }),
-            setIsDark: (isDark: boolean) => set({ isDark })
+            setIsDark: (isDark: boolean) => set({ isDark }),
+            toggleTheme: () => {
+                const currentMode = get().mode;
+                const newMode = currentMode === 'dark' ? 'light' : 'dark';
+                set({
+                    mode: newMode,
+                    isDark: newMode === 'dark'
+                });
+
+                // Добавляем прямое обновление HTML
+                if (newMode === 'dark') {
+                    document.documentElement.classList.add('dark');
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    document.documentElement.setAttribute('data-theme', 'light');
+                }
+            }
         }),
         {
             name: 'theme-store',
@@ -47,8 +65,14 @@ if (typeof window !== 'undefined') {
         // Применяем тему к HTML
         if (isDark) {
             document.documentElement.classList.add('dark')
+            document.documentElement.setAttribute('data-theme', 'dark');
+            document.documentElement.style.backgroundColor = '#0a0a0a';
+            document.body.style.backgroundColor = '#0a0a0a';
         } else {
             document.documentElement.classList.remove('dark')
+            document.documentElement.setAttribute('data-theme', 'light');
+            document.documentElement.style.backgroundColor = '#ffffff';
+            document.body.style.backgroundColor = '#ffffff';
         }
     }
 

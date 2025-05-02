@@ -23,8 +23,8 @@ const robotoMono = Roboto_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'MoyDom Real Estate',
-  description: 'Find your perfect home',
+  title: 'Car-Sale',
+  description: '',
   viewport: {
     width: 'device-width',
     initialScale: 1,
@@ -235,7 +235,6 @@ export default function RootLayout({
               overflow-y: auto;
               -webkit-overflow-scrolling: touch;
               padding-bottom: 120px;
-              padding-top: 110px;
               position: absolute;
               top: 0;
               left: 0;
