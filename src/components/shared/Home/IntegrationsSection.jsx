@@ -8,7 +8,7 @@ import * as d3 from 'd3';
 export const IntegrationsSection = () => {
   const [filter, setFilter] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedIntegration, setSelectedIntegration] = useState<Integration | null>(null);
+  const [selectedIntegration, setSelectedIntegration] = useState(null);
   const [isGridView, setIsGridView] = useState(true);
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: false, amount: 0.2 });

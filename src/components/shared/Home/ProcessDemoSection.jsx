@@ -11,7 +11,7 @@ export const ProcessDemoSection = () => {
   const [isD3Ready, setIsD3Ready] = useState(false);
   const containerRef = useRef(null);
   const isInView = useInView(containerRef, { once: false, amount: 0.3 });
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const intervalRef = useRef(null);
   
   // Более интересные и детализированные шаги
   const steps = [

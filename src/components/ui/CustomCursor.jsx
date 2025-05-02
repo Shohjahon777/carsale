@@ -14,7 +14,7 @@ export default function CustomCursor() {
   const [angle, setAngle] = useState(0);
   const [speed, setSpeed] = useState(0);
   
-  const cursorRef = useRef<HTMLDivElement>(null);
+ const cursorRef = useRef(null);
   const lastPositionRef = useRef({ x: 0, y: 0, time: 0 });
   
   // Проверка на мобильное устройство

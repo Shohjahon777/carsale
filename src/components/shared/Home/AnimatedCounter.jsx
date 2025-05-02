@@ -29,7 +29,7 @@ export const AnimatedCounter = ({ value, suffix = '', duration = 2000 }) => {
     if (!isVisible || !counterRef.current) return;
     
     const counter = counterRef.current;
-    const countTo = parseFloat(value);
+    const countTo = parseFloat(value.toString());
     const decimals = countTo % 1 !== 0 ? 1 : 0;
     
     const interpolate = d3.interpolateNumber(0, countTo);
@@ -39,8 +39,10 @@ export const AnimatedCounter = ({ value, suffix = '', duration = 2000 }) => {
       .duration(duration)
       .tween("text", function() {
         return function(t) {
-          const formattedValue = d3.format(decimals ? ".1f" : "d")(interpolate(t));
-          this.textContent = `${formattedValue}${suffix}`;
+          if (this) {
+            const formattedValue = d3.format(decimals ? ".1f" : "d")(interpolate(t));
+            this.textContent = `${formattedValue}${suffix}`;
+          }
         };
       });
   }, [isVisible, value, suffix, duration]);

@@ -11,7 +11,6 @@ export const BenefitsSection = ({ benefits }) => {
   const [activeIndex, setActiveIndex] = useState(null);
   const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1200);
   
-  // Отслеживаем размер экрана для адаптивности
   useEffect(() => {
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
