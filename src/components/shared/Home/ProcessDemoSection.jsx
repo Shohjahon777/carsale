@@ -895,7 +895,7 @@ export const ProcessDemoSection = () => {
         
         <div className="relative mx-auto">
           {/* Плавающие частицы для фона */}
-          <div className="absolute inset-0 -z-10">
+          <div className="absolute inset-0">
             <div className="absolute top-10 left-10 w-16 h-16 bg-primary/10 rounded-full animate-float"></div>
             <div className="absolute bottom-20 right-20 w-20 h-20 bg-primary/5 rounded-full animate-float-delay"></div>
             <div className="absolute top-1/2 right-1/3 w-12 h-12 bg-accent/10 rounded-full animate-float-slow"></div>
@@ -912,7 +912,7 @@ export const ProcessDemoSection = () => {
               ></motion.div>
             </div>
             
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 relative z-10">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 relative">
               {steps.map((step, index) => (
                 <motion.button
                   key={index}
@@ -1094,7 +1094,7 @@ export const ProcessDemoSection = () => {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className="absolute inset-0 bg-white dark:bg-gray-800 flex flex-col items-center justify-center p-6 z-10"
+                    className="absolute inset-0 bg-white dark:bg-gray-800 flex flex-col items-center justify-center p-6"
                   >
                     <div className="w-16 h-16 rounded-full bg-primary-light/20 flex items-center justify-center text-2xl mb-4">
                       {steps[activeStep].icon}

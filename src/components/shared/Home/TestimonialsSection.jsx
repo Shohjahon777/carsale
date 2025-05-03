@@ -224,7 +224,7 @@ export const TestimonialsSection = () => {
                     ></div>
                     
                     {/* Логотип компании */}
-                    <div className="relative z-10">
+                    <div className="relative">
                       <div className="w-20 h-20 rounded-full bg-white dark:bg-gray-700 p-1 shadow-lg mb-6 overflow-hidden">
                         <img 
                           src={testimonials[activeIndex].image} 
@@ -394,7 +394,7 @@ export const TestimonialsSection = () => {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.4, duration: 0.8 }}
-                        className="bg-gray-50 dark:bg-gray-900/30 rounded-lg p-6 shadow-sm relative z-10"
+                        className="bg-gray-50 dark:bg-gray-900/30 rounded-lg p-6 shadow-sm relative"
                       >
                         <p className="text-lg md:text-xl text-gray-800 dark:text-gray-100 mb-4 leading-relaxed italic">
                           "{testimonials[activeIndex].quote}"
@@ -508,7 +508,7 @@ export const TestimonialsSection = () => {
               <div className="absolute top-0 right-0 -mt-10 -mr-10 w-40 h-40 bg-white/10 rounded-full"></div>
               <div className="absolute bottom-0 left-0 -mb-10 -ml-10 w-40 h-40 bg-white/5 rounded-full"></div>
               
-              <div className="relative z-10">
+              <div className="relative">
                 <motion.div
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}

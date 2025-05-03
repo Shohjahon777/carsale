@@ -230,7 +230,7 @@ export const FaqSection = () => {
       <div className="absolute -top-20 -right-20 w-64 h-64 bg-primary/5 dark:bg-primary/10 rounded-full blur-3xl"></div>
       <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-primary/5 dark:bg-primary/10 rounded-full blur-3xl"></div>
       
-      <div className="container mx-auto relative z-10">
+      <div className="container mx-auto relative">
         <motion.div 
           className="text-center mb-12"
           initial={{ opacity: 0 }}
@@ -736,14 +736,14 @@ export const FaqSection = () => {
                 }}
               ></motion.div>
               
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 relative z-10">
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 relative ">
                 Не нашли ответ на свой вопрос?
               </h3>
-              <p className="text-gray-700 dark:text-gray-300 mb-6 relative z-10">
+              <p className="text-gray-700 dark:text-gray-300 mb-6 relative">
                 Свяжитесь с нами напрямую, и мы с удовольствием ответим на все ваши вопросы
               </p>
               
-              <div className="flex flex-col sm:flex-row justify-center items-center gap-4 relative z-10">
+              <div className="flex flex-col sm:flex-row justify-center items-center gap-4 relative">
                 <motion.button
                   whileHover={{ scale: 1.05, boxShadow: "0 10px 25px -5px rgba(123, 44, 191, 0.3)" }}
                   whileTap={{ scale: 0.95 }}
@@ -767,7 +767,7 @@ export const FaqSection = () => {
                 </motion.button>
               </div>
               
-              <div className="flex items-center justify-center mt-6 relative z-10 gap-4">
+              <div className="flex items-center justify-center mt-6 relative gap-4">
                 <motion.a 
                   href="#"
                   className="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary-light transition-colors"

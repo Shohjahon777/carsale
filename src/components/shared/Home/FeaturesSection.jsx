@@ -76,7 +76,7 @@ export const FeaturesSection = ({ features, title }) => {
                   <div className="absolute -left-4 -bottom-4 w-16 h-16 bg-white/10 rounded-full"></div>
                   
                   {/* Иконка в белом круге */}
-                  <div className="w-16 h-16 bg-white/95 dark:bg-white/90 rounded-full flex items-center justify-center shadow-lg relative z-10">
+                  <div className="w-16 h-16 bg-white/95 dark:bg-white/90 rounded-full flex items-center justify-center shadow-lg relative">
                     <div className="text-primary dark:text-primary">
                       {index === 0 && (
                         <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
@@ -103,7 +103,7 @@ export const FeaturesSection = ({ features, title }) => {
                   </div>
                   
                   {/* Название функции со светлым текстом */}
-                  <h3 className="text-xl font-bold text-white ml-4 relative z-10">
+                  <h3 className="text-xl font-bold text-white ml-4 relative">
                     {feature.title}
                   </h3>
                 </div>

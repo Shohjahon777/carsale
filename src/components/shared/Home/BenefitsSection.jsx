@@ -229,7 +229,7 @@ export const BenefitsSection = ({ benefits }) => {
           {/* Всплывающая подсказка при наведении */}
           {activeIndex !== null && (
             <motion.div 
-              className="absolute bg-white dark:bg-gray-800 p-4 rounded-lg shadow-lg z-10 border border-gray-100 dark:border-gray-700"
+              className="absolute bg-white dark:bg-gray-800 p-4 rounded-lg shadow-lg  border border-gray-100 dark:border-gray-700"
               style={{
                 top: '10%',
                 left: windowWidth >= 768 
@@ -280,7 +280,7 @@ export const BenefitsSection = ({ benefits }) => {
               {/* Фоновый декоративный элемент */}
               <div className="absolute -right-10 -top-10 w-24 h-24 bg-primary/5 dark:bg-primary/10 rounded-full transition-all duration-300 group-hover:scale-150"></div>
               
-              <div className="relative z-10">
+              <div className="relative">
                 <div className="text-3xl sm:text-4xl font-bold text-primary dark:text-primary-light mb-2 flex items-baseline">
                   <AnimatedCounter value={parseInt(item.value, 10) || 0} suffix="%" duration={1200} />
                 </div>

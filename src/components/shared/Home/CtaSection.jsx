@@ -101,7 +101,7 @@ export const CtaSection = ({ ctaSection, onCtaClick }) => {
   
   return (
     <section className="py-16 px-4 mb-16 relative overflow-hidden" ref={sectionRef}>
-      <div className="container mx-auto relative z-10">
+      <div className="container mx-auto relative">
         <div className="bg-gradient-to-r from-primary to-primary-dark rounded-2xl overflow-hidden shadow-xl relative">
           <div className="relative px-6 py-12 sm:px-12 sm:py-16 text-center">
             <motion.div 
