@@ -1,4 +1,3 @@
-// src/components/layout/MainNavigation.tsx
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
@@ -34,15 +33,6 @@ const ScrollProgress = () => {
         style={{ width: `${scrollProgress}%` }}
       />
     </div>
-  );
-};
-
-// Компонент для активного индикатора в меню
-const ActiveIndicator = ({ isActive }) => {
-  if (!isActive) return null;
-  
-  return (
-    <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-primary via-primary-light to-primary rounded-full" />
   );
 };
 
@@ -91,13 +81,14 @@ export default function MainNavigation() {
   const { isDark, toggleTheme } = useThemeStore();
   const { currentLocale, availableLocales, setLocale } = useLanguageStore();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [activeSubmenu, setActiveSubmenu] = useState(null);
+  // Исправлено: Типизируем activeSubmenu так, чтобы он мог быть строкой или null
+  const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
-  const headerRef = useRef(null);
+  const headerRef = useRef<HTMLElement | null>(null);
   
-  // Обработчик изменения языка
-  const handleLanguageChange = (locale) => {
+  // Обработчик изменения языка - добавлена типизация
+  const handleLanguageChange = (locale: any) => {
     setLocale(locale);
     setActiveSubmenu(null);
   };
@@ -152,8 +143,8 @@ export default function MainNavigation() {
   
   // Обработчик клика вне меню для его закрытия
   useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (activeSubmenu && !e.target.closest('.menu-dropdown')) {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (activeSubmenu && !(e.target as Element).closest('.menu-dropdown')) {
         setActiveSubmenu(null);
       }
     };
@@ -441,7 +432,7 @@ export default function MainNavigation() {
       onClick={() => setIsMenuOpen(false)}
     />
 
-    <div 
+ <div 
       className={`fixed inset-y-0 right-0 z-50 w-[280px] bg-white dark:bg-gray-900 md:hidden overflow-hidden transition-transform duration-300 transform ${
         isMenuOpen ? 'translate-x-0' : 'translate-x-full'
       }`}
@@ -587,7 +578,7 @@ export default function MainNavigation() {
       className={`md:hidden fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 z-60 transition-all duration-300 ${
         isMenuOpen ? 'opacity-0 translate-y-full' : 'opacity-100 translate-y-0'
       }`}
-      style={{ zIndex: 999 }} // Максимально высокий z-index
+      style={{ zIndex: 999 }} // Используем inline style для z-index
     >
       <div className="grid grid-cols-5 h-16">
         {mobileNavGroups.map((item) => (
