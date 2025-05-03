@@ -5,7 +5,8 @@ import Link from 'next/link';
 import { ArrowRightIcon, PlayIcon } from '@heroicons/react/24/outline';
 import { useTelegram } from '../hooks/useTelegram';
 import { useLanguageStore } from '../store/language';
-import {  motion } from 'framer-motion';
+import { motion } from 'framer-motion';
+
 import { TestimonialsSection } from '../components/shared/Home/TestimonialsSection';
 import { FaqSection } from '../components/shared/Home/FaqSection';
 import { pageLocalization } from '../components/shared/Home/localization';
@@ -15,6 +16,16 @@ import { CtaSection } from '../components/shared/Home/CtaSection';
 import { ProcessDemoSection } from '../components/shared/Home/ProcessDemoSection';
 import { IntegrationsSection } from '../components/shared/Home/IntegrationsSection';
 
+import { StatsSection } from '../components/shared/Home/StatsSection';
+import { TargetAudienceSection } from '../components/shared/Home/TargetAudienceSection';
+import { SecuritySection } from '../components/shared/Home/SecuritySection';
+import { SupportSection } from '../components/shared/Home/SupportSection';
+import { BlogSection } from '../components/shared/Home/BlogSection';
+// import { LanguageSwitcher } from '../components/shared/Home/LanguageSwitcher';
+import { EventsSection } from '../components/shared/Home/EventsSection';
+import { TrialSection } from '../components/shared/Home/TrialSection';
+import { ComparisonSection } from '../components/shared/Home/ComparisonSection';
+import { SocialLinks } from '../components/shared/Home/SocialLinks';
 
 export default function Home() {
   const { hapticFeedback } = useTelegram();
@@ -37,8 +48,8 @@ export default function Home() {
 
   return (
     <div className="relative overflow-hidden page-scrollable">
+      {/* Фоновые градиенты */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary-light/10 via-white to-accent/10 dark:from-primary-dark/20 dark:via-black dark:to-primary-dark/5"></div>
-      
       <div className="absolute top-20 right-[10%] w-64 h-64 bg-primary/20 dark:bg-primary/10 rounded-full blur-3xl opacity-70"></div>
       <div className="absolute bottom-20 left-[5%] w-72 h-72 bg-accent/20 dark:bg-primary-dark/10 rounded-full blur-3xl opacity-70"></div>
       
@@ -188,22 +199,123 @@ export default function Home() {
         </div>
       </section>
       
+      {/* Статистика компании */}
+      <StatsSection />
+      
+      {/* Основные возможности */}
       <FeaturesSection
         features={t.features.list} 
         title={t.features.title}
       />
       
+      {/* Для кого это */}
+      <TargetAudienceSection />
+      
+      {/* Преимущества */}
       <BenefitsSection benefits={t.benefits} />
       
+      {/* Сравнение с конкурентами */}
+      <ComparisonSection />
+      
+      {/* Демонстрация процесса */}
+      <ProcessDemoSection />
+      
+      {/* Безопасность и защита данных */}
+      <SecuritySection />
+      
+      {/* Интеграции */}
+      <IntegrationsSection />
+      
+      {/* Техническая поддержка */}
+      <SupportSection />
+      
+      {/* 14 дней бесплатно */}
+      <TrialSection />
+      
+      {/* Мероприятия и вебинары */}
+      <EventsSection />
+      
+      {/* Отзывы клиентов */}
+      <TestimonialsSection />
+      
+      {/* Блог и новости */}
+      <BlogSection />
+      
+      {/* Часто задаваемые вопросы */}
+      <FaqSection />
+      
+      {/* CTA секция */}
       <CtaSection
         ctaSection={t.ctaSection} 
         onCtaClick={handleCtaClick}
       />
-
-      <ProcessDemoSection />
-      <IntegrationsSection />
-      <TestimonialsSection />
-      <FaqSection/> 
+      
+      {/* Футер с социальными сетями */}
+      <footer className="bg-white dark:bg-gray-900 pt-16 pb-8 px-4 relative z-10">
+        <div className="container mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+            <div>
+              <Link href="/" className="inline-block mb-4">
+                <h3 className="text-xl font-bold text-primary dark:text-primary-light">Car-Sale</h3>
+              </Link>
+              <p className="text-gray-600 dark:text-gray-400 mb-4">
+                Автоматизируем продажи автомобилей — от склада до контракта
+              </p>
+              
+              {/* Социальные сети */}
+              <SocialLinks />
+            </div>
+            
+            <div>
+              <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Продукты</h4>
+              <ul className="space-y-2">
+                <li><Link href="/products/crm" className="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary-light">CRM для автодилеров</Link></li>
+                <li><Link href="/products/inventory" className="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary-light">Учет склада</Link></li>
+                <li><Link href="/products/contracts" className="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary-light">Электронные контракты</Link></li>
+                <li><Link href="/products/analytics" className="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary-light">Аналитика и отчеты</Link></li>
+              </ul>
+            </div>
+            
+            <div>
+              <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Компания</h4>
+              <ul className="space-y-2">
+                <li><Link href="/about" className="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary-light">О нас</Link></li>
+                <li><Link href="/blog" className="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary-light">Блог</Link></li>
+                <li><Link href="/careers" className="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary-light">Карьера</Link></li>
+                <li><Link href="/contact" className="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary-light">Контакты</Link></li>
+              </ul>
+            </div>
+            
+            <div>
+              <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Поддержка</h4>
+              <ul className="space-y-2">
+                <li><Link href="/support" className="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary-light">Центр поддержки</Link></li>
+                <li><Link href="/docs" className="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary-light">Документация</Link></li>
+                <li><Link href="/faq" className="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary-light">FAQ</Link></li>
+                <li><Link href="/demo" className="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary-light">Запросить демо</Link></li>
+              </ul>
+            </div>
+          </div>
+          
+          <div className="border-t border-gray-200 dark:border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+            <div className="text-gray-600 dark:text-gray-400 text-sm mb-4 md:mb-0">
+              © 2025 Car-Sale. Все права защищены.
+            </div>
+            
+            <div className="flex space-x-4">
+              <Link href="/privacy" className="text-gray-600 dark:text-gray-400 text-sm hover:text-primary dark:hover:text-primary-light">
+                Политика конфиденциальности
+              </Link>
+              <Link href="/terms" className="text-gray-600 dark:text-gray-400 text-sm hover:text-primary dark:hover:text-primary-light">
+                Условия использования
+              </Link>
+              <Link href="/cookies" className="text-gray-600 dark:text-gray-400 text-sm hover:text-primary dark:hover:text-primary-light">
+                Политика cookies
+              </Link>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }

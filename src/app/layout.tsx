@@ -234,7 +234,7 @@ export default function RootLayout({
               height: 100%;
               overflow-y: auto;
               -webkit-overflow-scrolling: touch;
-              padding-bottom: 140px;
+              // padding-bottom: 140px;
               position: absolute;
               top: 0;
               left: 0;
