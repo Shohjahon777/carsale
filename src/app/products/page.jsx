@@ -437,7 +437,7 @@ export default function ProductsPage() {
       
       {/* Герой-секция */}
       <section className="pt-10 sm:pt-16 pb-10 sm:pb-16 px-4">
-        <div className="container mx-auto max-w-7xl">
+        <div className="container mx-auto">
           <div className="flex flex-col lg:flex-row items-center">
             <div className="w-full lg:w-1/2 text-center lg:text-left lg:pr-10 mb-10 lg:mb-0">
               <motion.h1 
@@ -562,7 +562,7 @@ export default function ProductsPage() {
       
       {/* Секция "Экосистема решений Car-Sale" - переработанная */}
       <section className="py-12 px-4 relative overflow-hidden">
-        <div className="container mx-auto max-w-6xl">
+        <div className="container mx-auto max-w-7xl">
           <motion.div 
             ref={sectionRef}
             className="bg-white dark:bg-gray-800 rounded-2xl p-6 sm:p-8 shadow-xl border border-gray-100 dark:border-gray-700"
@@ -765,7 +765,7 @@ export default function ProductsPage() {
       
       {/* Основная секция с решениями */}
       <section id="solutionsGrid" className="py-16 px-4">
-        <div className="container mx-auto max-w-7xl">
+        <div className="container mx-auto ">
           <div className="text-center mb-12">
             <motion.h2 
               className="text-3xl font-bold text-gray-900 dark:text-white mb-4"

@@ -134,7 +134,7 @@ export default function EnhancedMainWrapper({ children }: EnhancedMainWrapperPro
         )}
         
         {/* Добавляем компонент кастомного курсора */}
-        <CustomCursor />
+        {/* <CustomCursor /> */}
       </div>
     </div>
   );
