@@ -1034,7 +1034,7 @@ export default function IntegrationsPage() {
           >
             <div className="container mx-auto">
               <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-8 border border-gray-100 dark:border-gray-700">
-                <div className="max-w-3xl mx-auto">
+                <div className="mx-auto">
                   <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-4 text-center">
                     {t.custom.title}
                   </h2>
@@ -1152,7 +1152,7 @@ export default function IntegrationsPage() {
             transition={{ duration: 0.3 }}
           >
             <div className="container mx-auto">
-              <div className="mb-10 max-w-3xl mx-auto">
+              <div className="mb-10  mx-auto">
                 <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-4 text-center">
                   {t.api.title}
                 </h2>
@@ -1309,7 +1309,7 @@ export default function IntegrationsPage() {
       {/* FAQ секция */}
       <section className="py-16 px-4 bg-gray-50 dark:bg-gray-900/50">
         <div className="container mx-auto">
-          <div className="max-w-3xl mx-auto">
+          <div className="mx-auto">
             <motion.h2 
               className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-10 text-center"
               initial={{ opacity: 0, y: -20 }}

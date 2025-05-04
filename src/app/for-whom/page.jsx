@@ -1209,7 +1209,7 @@ export default function ForWhomPage() {
             <div className="absolute -top-24 -right-24 w-48 h-48 bg-primary/10 dark:bg-primary/20 rounded-full blur-xl"></div>
             <div className="absolute -bottom-24 -left-24 w-48 h-48 bg-primary-light/10 dark:bg-primary-dark/20 rounded-full blur-xl"></div>
             
-            <div className="relative z-10">
+            <div className="">
               <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
                 <div className="lg:w-1/2">
                   <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
