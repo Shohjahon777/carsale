@@ -768,81 +768,267 @@ export default function AboutPage() {
             ))}
           </div>
           
-          {/* География присутствия */}
-          <div className="max-w-5xl mx-auto">
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-8 text-center">
-              {t.stats.geography.title}
-            </h3>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {/* Карта с отметками (иллюстративно) */}
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className="bg-white dark:bg-gray-800 rounded-xl p-5 shadow-lg border border-gray-100 dark:border-gray-700 h-[400px] relative"
-              >
-                <div className="absolute inset-0 p-5">
-                  <div className="w-full h-full rounded-lg bg-gray-100 dark:bg-gray-700/50 overflow-hidden">
-                    {/* Здесь в реальном проекте была бы карта с маркерами */}
-                    <div className="w-full h-full flex items-center justify-center">
-                      <p className="text-gray-500 dark:text-gray-400 text-center">
-                        Интерактивная карта<br />дилерской сети Car-Sale
-                      </p>
+      <div className="max-w-5xl mx-auto">
+  <motion.h3 
+    className="text-2xl font-bold text-gray-900 dark:text-white mb-8 text-center"
+    initial={{ opacity: 0, y: -10 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.5 }}
+  >
+    {t.stats.geography.title}
+  </motion.h3>
+  
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+    {/* Интерактивная бизнес-карта с показателями эффективности */}
+    <motion.div
+      initial={{ opacity: 0, x: -20 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6 }}
+      className="bg-white dark:bg-gray-800 rounded-xl p-5 shadow-xl border border-gray-100 dark:border-gray-700 h-[400px] relative"
+    >
+      <div className="absolute inset-0 p-5">
+        <div className="w-full h-full rounded-lg bg-gray-50 dark:bg-gray-800 overflow-hidden">
+          {/* Заголовок визуализации */}
+          <div className="absolute top-0 left-0 right-0 bg-gradient-to-r from-primary/10 to-primary-light/10 dark:from-primary/20 dark:to-primary-light/20 p-3 border-b border-gray-200 dark:border-gray-700 z-10">
+            <h4 className="text-base font-bold text-gray-800 dark:text-white text-center">
+              Показатели эффективности по регионам
+            </h4>
+          </div>
+          
+          {/* Основное содержимое бизнес-карты */}
+          <div className="absolute top-12 left-0 right-0 bottom-0 overflow-auto p-3">
+            <div className="grid grid-cols-2 gap-4 h-full">
+              {t.stats.geography.countries.map((country, index) => {
+                // Генерируем случайные бизнес-показатели для каждой страны
+                const salesGrowth = 5 + Math.floor(Math.random() * 15);
+                const avgDealValue = 15000 + Math.floor(Math.random() * 10000);
+                const satisfaction = 85 + Math.floor(Math.random() * 10);
+                const marketShare = 5 + Math.floor(Math.random() * 25);
+                
+                return (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: index * 0.1 }}
+                    whileHover={{ scale: 1.03, zIndex: 20 }}
+                    className="bg-white dark:bg-gray-700 rounded-lg p-3 shadow-md border border-gray-200 dark:border-gray-600 flex flex-col h-full relative"
+                  >
+                    {/* Заголовок карточки с флагом страны */}
+                    <div className="flex items-center mb-3 pb-2 border-b border-gray-100 dark:border-gray-600">
+                      <div className="w-5 h-5 rounded-full mr-2" style={{ backgroundColor: country.color }}></div>
+                      <h5 className="text-sm font-bold text-gray-800 dark:text-white">{country.name}</h5>
+                      <div className="ml-auto px-2 py-0.5 bg-primary/10 dark:bg-primary/20 rounded text-xs font-medium text-primary dark:text-primary-light">
+                        {country.dealers} {index === 0 ? '✦' : ''}
+                      </div>
                     </div>
                     
-                    {/* Маркеры на карте (иллюстративно) */}
-                    {t.stats.geography.countries.map((country, i) => (
-                      <div 
-                        key={i}
-                        className="absolute w-3 h-3 rounded-full"
-                        style={{ 
-                          backgroundColor: country.color,
-                          top: `${20 + i * 10}%`, 
-                          left: `${20 + Math.sin(i) * 30}%` 
-                        }}
-                      >
-                        <div className="absolute -top-1 -left-1 w-5 h-5 rounded-full bg-current opacity-30 animate-ping" style={{ color: country.color }}></div>
+                    {/* Бизнес-показатели */}
+                    <div className="flex-1 flex flex-col justify-between">
+                      <div className="space-y-2">
+                        {/* Рост продаж */}
+                        <div className="flex items-center justify-between text-xs">
+                          <span className="text-gray-600 dark:text-gray-300">Рост продаж:</span>
+                          <span className="font-medium text-green-600 dark:text-green-400">+{salesGrowth}%</span>
+                        </div>
+                        
+                        {/* Средняя сделка */}
+                        <div className="flex items-center justify-between text-xs">
+                          <span className="text-gray-600 dark:text-gray-300">Средняя сделка:</span>
+                          <span className="font-medium text-gray-800 dark:text-gray-200">${avgDealValue.toLocaleString()}</span>
+                        </div>
+                        
+                        {/* Удовлетворенность */}
+                        <div className="flex items-center justify-between text-xs">
+                          <span className="text-gray-600 dark:text-gray-300">Удовлетворенность:</span>
+                          <div className="flex items-center">
+                            <span className="font-medium text-amber-500">{satisfaction}%</span>
+                            <div className="ml-1 flex">
+                              {[...Array(5)].map((_, i) => (
+                                <svg
+                                  key={i}
+                                  className={`w-2 h-2 ${i < Math.round(satisfaction/20) ? 'text-amber-500' : 'text-gray-300 dark:text-gray-600'}`}
+                                  fill="currentColor"
+                                  viewBox="0 0 20 20"
+                                >
+                                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                </svg>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                        
+                        {/* Доля рынка */}
+                        <div className="flex items-center justify-between text-xs mt-2">
+                          <span className="text-gray-600 dark:text-gray-300">Доля рынка:</span>
+                          <span className="font-medium text-blue-600 dark:text-blue-400">{marketShare}%</span>
+                        </div>
+                        
+                        {/* Прогресс-бар доли рынка */}
+                        <div className="w-full h-1.5 bg-gray-100 dark:bg-gray-600 rounded-full overflow-hidden">
+                          <motion.div 
+                            className="h-full"
+                            style={{ backgroundColor: country.color }}
+                            initial={{ width: 0 }}
+                            whileInView={{ width: `${marketShare}%` }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 1, delay: index * 0.1 + 0.3 }}
+                          ></motion.div>
+                        </div>
                       </div>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
-              
-              {/* График по странам */}
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className="bg-white dark:bg-gray-800 rounded-xl p-5 shadow-lg border border-gray-100 dark:border-gray-700"
-              >
-                <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-6">
-                  Распределение дилеров по странам
-                </h4>
-                
-                {t.stats.geography.countries.map((country, index) => (
-                  <div key={index} className="mb-4">
-                    <div className="flex justify-between items-center mb-1">
-                      <span className="text-gray-700 dark:text-gray-300">{country.name}</span>
-                      <span className="text-gray-700 dark:text-gray-300 font-medium">{country.dealers}</span>
+                      
+                      {/* Тренд */}
+                      <div className="flex items-center mt-3 text-xs">
+                        <div className={`px-2 py-0.5 rounded ${
+                          index % 3 === 0 ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400' : 
+                          index % 3 === 1 ? 'bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400' :
+                          'bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400'
+                        }`}>
+                          {index % 3 === 0 ? 'Растущий рынок' : index % 3 === 1 ? 'Стабильный рынок' : 'Новый рынок'}
+                        </div>
+                        <div className="ml-auto">
+                          {index % 3 === 0 ? 
+                            <svg className="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                            </svg> : 
+                            index % 3 === 1 ?
+                            <svg className="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z" />
+                            </svg> :
+                            <svg className="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                            </svg>
+                          }
+                        </div>
+                      </div>
                     </div>
-                    <div className="w-full h-2 bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden">
-                      <motion.div 
-                        className="h-full"
-                        style={{ backgroundColor: country.color }}
-                        initial={{ width: 0 }}
-                        whileInView={{ width: `${(country.dealers / 250) * 100}%` }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 1, delay: index * 0.1 + 0.3 }}
-                      ></motion.div>
-                    </div>
-                  </div>
-                ))}
-              </motion.div>
+                  </motion.div>
+                );
+              })}
             </div>
           </div>
+        </div>
+      </div>
+    </motion.div>
+    
+    {/* График по странам с улучшенным дизайном */}
+    <motion.div
+      initial={{ opacity: 0, x: 20 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6 }}
+      className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-xl border border-gray-100 dark:border-gray-700"
+    >
+      <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-6 flex items-center">
+        <svg className="w-5 h-5 mr-2 text-primary dark:text-primary-light" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z" />
+          <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z" />
+        </svg>
+        Распределение дилеров по странам
+      </h4>
+      
+      <div className="space-y-4">
+        {t.stats.geography.countries.map((country, index) => (
+          <motion.div 
+            key={index} 
+            className="group"
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: index * 0.1 + 0.3 }}
+            whileHover={{ scale: 1.01 }}
+          >
+            <div className="flex justify-between items-center mb-1">
+              <div className="flex items-center">
+                <div className="w-3 h-3 rounded-full mr-2" style={{ backgroundColor: country.color }}></div>
+                <span className="text-gray-700 dark:text-gray-300 font-medium">{country.name}</span>
+              </div>
+              <div className="flex items-baseline">
+                <span className="text-lg font-bold text-primary dark:text-primary-light mr-1">
+                  {country.dealers}
+                </span>
+                <span className="text-xs text-gray-500 dark:text-gray-400">дилеров</span>
+              </div>
+            </div>
+            
+            <div className="w-full h-3 bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden shadow-inner">
+              <motion.div 
+                className="h-full rounded-full"
+                style={{ 
+                  background: `linear-gradient(90deg, ${country.color}cc, ${country.color})`,
+                }}
+                initial={{ width: 0 }}
+                whileInView={{ width: `${(country.dealers / 250) * 100}%` }}
+                viewport={{ once: true }}
+                transition={{ duration: 1, delay: index * 0.1 + 0.3 }}
+              >
+                <div className="h-full w-full bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              </motion.div>
+            </div>
+            
+            <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400 mt-1">
+              <span>{Math.round((country.dealers / 250) * 100)}% от общего числа</span>
+              <span>
+                {index === 0 && (
+                  <span className="inline-flex items-center text-xs px-1.5 py-0.5 bg-primary/10 dark:bg-primary/20 text-primary dark:text-primary-light rounded">
+                    <svg className="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    </svg>
+                    Ключевой рынок
+                  </span>
+                )}
+              </span>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+      
+      {/* Ключевые выводы и сопоставление */}
+      <motion.div 
+        className="mt-8 pt-4 border-t border-gray-100 dark:border-gray-700"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5, delay: 0.8 }}
+      >
+        <h5 className="text-sm font-bold text-gray-900 dark:text-white mb-3">
+          Ключевые выводы:
+        </h5>
+        
+        <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-300">
+          <li className="flex items-start">
+            <svg className="w-4 h-4 text-green-500 mt-0.5 mr-1.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span>
+              <strong>{t.stats.geography.countries[0].name}</strong> лидирует с {t.stats.geography.countries[0].dealers} дилерами (
+              {Math.round((t.stats.geography.countries[0].dealers / 250) * 100)}% сети)
+            </span>
+          </li>
+          <li className="flex items-start">
+            <svg className="w-4 h-4 text-blue-500 mt-0.5 mr-1.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+            </svg>
+            <span>
+              Наибольший потенциал роста в {t.stats.geography.countries[t.stats.geography.countries.length-2].name} и {t.stats.geography.countries[t.stats.geography.countries.length-1].name}
+            </span>
+          </li>
+          <li className="flex items-start">
+            <svg className="w-4 h-4 text-amber-500 mt-0.5 mr-1.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+            </svg>
+            <span>
+              За последний год активнее всего росла сеть в {t.stats.geography.countries[1].name} (+18%)
+            </span>
+          </li>
+        </ul>
+      </motion.div>
+    </motion.div>
+  </div>
+</div>
         </div>
       </section>
       
