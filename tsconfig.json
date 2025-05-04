@@ -42,7 +42,7 @@
     "src/components/shared/Home/IntegrationsSection.jsx",
     "src/components/shared/Home/ProcessDemoSection.jsx",
     "src/components/shared/Home/TestimonialsSection.jsx"
-, "src/components/ui/CustomCursor.jsx", "next.config.js"  ],
+, "src/components/ui/CustomCursor.jsx", "next.config.js", "src/app/about/page.jsx"  ],
   "exclude": [
     "node_modules"
   ]

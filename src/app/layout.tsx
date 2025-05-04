@@ -46,7 +46,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ru" className="overscroll-none">
+    <html lang="ru">
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -103,7 +103,7 @@ export default function RootLayout({
                 if (mainContent) {
                   if (isMobileDevice()) {
                     mainContent.style.paddingTop = '4rem';
-                    mainContent.style.paddingBottom = '6rem';
+                    mainContent.style.paddingBottom = '0'; // Убираем фиксированный отступ снизу
                     mainContent.classList.add('mobile-padding');
                     mainContent.classList.remove('desktop-padding');
                   } else {
@@ -148,39 +148,23 @@ export default function RootLayout({
               document.addEventListener('DOMContentLoaded', () => {
                 applyPadding();
                 setupTelegramPaddings();
-                
-                // Явно отключаем скролл на html и body
-                document.documentElement.style.overflow = 'hidden';
-                document.body.style.overflow = 'hidden';
               });
               
               window.addEventListener('load', () => {
                 applyPadding();
                 setupTelegramPaddings();
-                
-                // Явно отключаем скролл на html и body
-                document.documentElement.style.overflow = 'hidden';
-                document.body.style.overflow = 'hidden';
               });
               
               // Также применяем немедленно
               setTimeout(() => {
                 applyPadding();
                 setupTelegramPaddings();
-                
-                // Явно отключаем скролл на html и body
-                document.documentElement.style.overflow = 'hidden';
-                document.body.style.overflow = 'hidden';
               }, 0);
               
               // И с небольшой задержкой
               setTimeout(() => {
                 applyPadding();
                 setupTelegramPaddings();
-                
-                // Явно отключаем скролл на html и body
-                document.documentElement.style.overflow = 'hidden';
-                document.body.style.overflow = 'hidden';
               }, 500);
             `,
           }}
@@ -195,51 +179,27 @@ export default function RootLayout({
               --tg-viewport-stable-height: 100vh;
             }
             
-            /* Жестко отключаем скролл на html и body */
-            html, body {
-              overflow: hidden !important;
-              height: 100% !important;
-              position: fixed !important;
-              width: 100% !important;
-              touch-action: manipulation !important;
-            }
-            
             /* Базовые стили для main-content */
             .main-content {
-              flex: 1;
               background-color: #f7f7f7;
               position: relative;
-              /* Отключаем скролл на основном контейнере */
-              overflow: hidden !important;
-              min-height: 100vh;
-              min-height: var(--tg-viewport-stable-height, 100vh);
+              width: 100%;
               /* Добавляем отступы для полноэкранного режима */
               padding-top: var(--safe-area-inset-top, 0px);
-              padding-bottom: calc(var(--safe-area-inset-bottom, 0px) + 100px);
             }
             
             /* Классы для JS-применения */
             .mobile-padding {
               padding-top: 4rem !important;
-              padding-bottom: 6rem !important;
             }
             
             .desktop-padding {
               padding-top: 0 !important;
-              padding-bottom: 0 !important;
             }
             
             /* Стиль для страниц, где нужен скролл */
             .page-scrollable {
-              height: 100%;
-              overflow-y: auto;
-              -webkit-overflow-scrolling: touch;
-              // padding-bottom: 140px;
-              position: absolute;
-              top: 0;
-              left: 0;
-              right: 0;
-              bottom: 0;
+              width: 100%;
             }
             
             /* Фиксируем нижнюю навигацию */
@@ -254,7 +214,6 @@ export default function RootLayout({
             /* Стили для режима Telegram expanded */
             body.tg-expanded .main-content {
               padding-top: var(--safe-area-inset-top, 0px);
-              padding-bottom: var(--safe-area-inset-bottom, 0px);
             }
             
             body.tg-expanded .fixed-bottom-nav {
@@ -265,7 +224,7 @@ export default function RootLayout({
       </head>
       <body
         className={`${inter.variable} ${interSans.variable} ${robotoMono.variable} bg-[#f7f7f7] antialiased touch-manipulation`}
-        style={{ fontFamily: 'Inter, sans-serif', overflow: 'hidden' }}
+        style={{ fontFamily: 'Inter, sans-serif' }}
       >
         <EnhancedMainWrapper>
           {children}

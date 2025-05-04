@@ -6,6 +6,7 @@ import TelegramWebAppInitializer from './TelegramWebAppInitializer';
 import MainNavigation from './MainNavigation';
 import { useThemeStore } from '../../store/theme';
 import CustomCursor from '../ui/CustomCursor';
+import Footer from './Footer'
 
 interface EnhancedMainWrapperProps {
   children: ReactNode;
@@ -27,9 +28,8 @@ export default function EnhancedMainWrapper({ children }: EnhancedMainWrapperPro
     
     setPrevPath(pathname);
     
-    if (mainRef.current) {
-      mainRef.current.scrollTop = 0;
-    }
+    // Скролл в начало страницы при переходе на новую страницу
+    window.scrollTo(0, 0);
     
     document.addEventListener('click', handleUserInteraction);
     
@@ -74,9 +74,7 @@ export default function EnhancedMainWrapper({ children }: EnhancedMainWrapperPro
     setIsLoading(true);
     
     // Сбрасываем скролл вверх
-    if (mainRef.current) {
-      mainRef.current.scrollTop = 0;
-    }
+    window.scrollTo(0, 0);
     
     // Скрываем лоадер после перехода
     setTimeout(() => {
@@ -92,21 +90,19 @@ export default function EnhancedMainWrapper({ children }: EnhancedMainWrapperPro
     <div className={`app-wrapper ${isDark ? 'dark' : 'light'}`} style={{ backgroundColor: 'var(--background)' }}>
       <MainNavigation />
       
-      {/* Основной контент с поддержкой скроллинга */}
-      <main 
+      {/* Основной контент без фиксированного скролла */}
+      <div 
         ref={mainRef}
-        className="main-content scrollbar-none relative"
+        className="main-content relative"
         style={{ 
-          overflow: 'auto',
-          WebkitOverflowScrolling: 'touch',
-          height: '100vh',
-          paddingTop: '4rem',
           backgroundColor: 'var(--background)',
-          color: 'var(--foreground)'
+          color: 'var(--foreground)',
+          paddingTop: '4rem'
         }}
       >
         <TelegramWebAppInitializer />
         {children}
+        <Footer />
         
         {isLoading && (
           <div className="fixed inset-0 z-50 flex items-center justify-center pointer-events-none">
@@ -139,7 +135,7 @@ export default function EnhancedMainWrapper({ children }: EnhancedMainWrapperPro
         
         {/* Добавляем компонент кастомного курсора */}
         <CustomCursor />
-      </main>
+      </div>
     </div>
   );
 }
