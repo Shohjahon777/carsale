@@ -16,7 +16,7 @@ export default function EnhancedMainWrapper({ children }: EnhancedMainWrapperPro
   const mainRef = useRef<HTMLDivElement>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [prevPath, setPrevPath] = useState('');
-  const pathname = usePathname();
+  const pathname = usePathname() ?? '';
   const { isDark } = useThemeStore();
   const [mounted, setMounted] = useState(false);
 

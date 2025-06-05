@@ -166,7 +166,7 @@ const mobileNavGroups = [
 ];
 
 export default function MainNavigation() {
-	const pathname = usePathname();
+	const pathname = usePathname() ?? '';
 	const {isDark, toggleTheme} = useThemeStore();
 	const {currentLocale, availableLocales, setLocale} = useLanguageStore();
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
