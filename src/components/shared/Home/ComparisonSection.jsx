@@ -1,122 +1,59 @@
 // ComparisonSection.jsx
 'use client';
 
-import React, { useRef, useState } from "react";
-import { motion, AnimatePresence, useInView } from 'framer-motion';
+import React, {useEffect, useRef, useState} from "react";
+import { motion, useInView } from 'framer-motion';
+import axios from "axios";
+import {useLanguageStore} from "@/src/store/language";
+import {pageLocalization} from "@/src/components/shared/Home/localization";
 
 export const ComparisonSection = () => {
   const [expandedFeature, setExpandedFeature] = useState(null);
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, threshold: 0.1 });
-  
-  const comparisonFeatures = [
-    {
-      name: "Управление складом",
-      ourSystem: {
-        available: true,
-        details: "Полное управление автопарком с отслеживанием всех параметров автомобилей и интеграцией с поставщиками"
-      },
-      competitor1: {
-        available: true,
-        details: "Базовое управление без интеграции с внешними системами"
-      },
-      competitor2: {
-        available: false,
-        details: "Функционал отсутствует, требуется отдельная система"
-      }
-    },
-    {
-      name: "CRM и управление клиентами",
-      ourSystem: {
-        available: true,
-        details: "Полнофункциональная CRM со сквозной аналитикой, интеграцией с мессенджерами и автоматическими сценариями работы"
-      },
-      competitor1: {
-        available: true,
-        details: "Базовая CRM без автоматизации и аналитики"
-      },
-      competitor2: {
-        available: true,
-        details: "Ограниченная функциональность без интеграций"
-      }
-    },
-    {
-      name: "Электронные контракты",
-      ourSystem: {
-        available: true,
-        details: "Полный цикл электронного документооборота с цифровой подписью и юридической значимостью"
-      },
-      competitor1: {
-        available: false,
-        details: "Функционал отсутствует"
-      },
-      competitor2: {
-        available: true,
-        details: "Частичная поддержка без юридической значимости"
-      }
-    },
-    {
-      name: "Интеграция с банками",
-      ourSystem: {
-        available: true,
-        details: "Прямая интеграция с 15+ банками, автоматическая отправка заявок, отслеживание статусов"
-      },
-      competitor1: {
-        available: true,
-        details: "Интеграция с ограниченным числом банков"
-      },
-      competitor2: {
-        available: false,
-        details: "Функционал отсутствует"
-      }
-    },
-    {
-      name: "Аналитика и отчётность",
-      ourSystem: {
-        available: true,
-        details: "Расширенная аналитика в реальном времени, настраиваемые дашборды, прогнозирование"
-      },
-      competitor1: {
-        available: true,
-        details: "Базовая аналитика без возможности настройки"
-      },
-      competitor2: {
-        available: true,
-        details: "Ограниченный набор отчетов"
-      }
-    },
-    {
-      name: "Мобильное приложение",
-      ourSystem: {
-        available: true,
-        details: "Полнофункциональное мобильное приложение для iOS и Android с офлайн-режимом"
-      },
-      competitor1: {
-        available: true,
-        details: "Ограниченная мобильная версия"
-      },
-      competitor2: {
-        available: false,
-        details: "Функционал отсутствует"
-      }
-    },
-    {
-      name: "API для интеграции",
-      ourSystem: {
-        available: true,
-        details: "Открытый API, документация, библиотеки для популярных языков программирования"
-      },
-      competitor1: {
-        available: false,
-        details: "Функционал отсутствует"
-      },
-      competitor2: {
-        available: true,
-        details: "Ограниченный API без документации"
-      }
-    }
-  ];
-  
+  const [comparisonFeatures, setComparisonFeatures] = useState([]);
+  const [ourAdvantages, setOurAdvantages] = useState([]);
+  const [otherCompetitors, setOtherCompetitors] = useState([]);
+
+  const { currentLocale } = useLanguageStore();
+
+  const t = pageLocalization[currentLocale] || pageLocalization.ru;
+
+    useEffect(() => {
+        axios
+            .post('/api/get-main-comparison', { locale: currentLocale })
+            .then((response) => {
+                setComparisonFeatures(response.data);
+            })
+            .catch((error) => {
+                console.error('Error fetching stats:', error);
+            });
+
+
+
+    }, [currentLocale]);
+
+  useEffect(() => {
+    axios
+        .post('/api/get-main-com-adv', { locale: currentLocale })
+        .then((response) => {
+          console.log('adv', response.data);
+
+          const data = response.data;
+
+          const ourAdv = data.filter(item => item.sort === 'W');
+          const competitors = data.filter(item => item.sort !== 'W');
+
+          setOurAdvantages(ourAdv);
+          setOtherCompetitors(competitors);
+        })
+        .catch((error) => {
+          console.error('Error fetching:', error);
+        });
+  }, [currentLocale]);
+
+
+
   return (
     <section 
       className="py-20 px-4 bg-white dark:bg-gray-900 relative overflow-hidden" 
@@ -138,11 +75,11 @@ export const ComparisonSection = () => {
             transition={{ type: "spring", stiffness: 100, delay: 0.2 }}
             className="inline-block px-4 py-1 bg-primary/10 dark:bg-primary/20 text-primary dark:text-primary-light rounded-full text-sm font-semibold mb-3"
           >
-            СРАВНЕНИЕ
+            {t.comparison.title}
           </motion.span>
           
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-            Почему выбирают нас
+            {t.comparison.why_choose_us}
           </h2>
           
           <motion.div
@@ -158,14 +95,14 @@ export const ComparisonSection = () => {
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6, delay: 0.6 }}
           >
-            Сравнение нашей системы с конкурентными решениями
+            {t.comparison.comparison_intro}
           </motion.p>
         </motion.div>
         
         {/* Сравнительная таблица */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          // initial={{ opacity: 0, y: 30 }}
+          // animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.8, delay: 0.8 }}
           className="bg-white dark:bg-gray-800 rounded-xl shadow-xl border border-gray-100 dark:border-gray-700 overflow-hidden"
         >
@@ -174,27 +111,27 @@ export const ComparisonSection = () => {
               <thead className="bg-gray-50 dark:bg-gray-700">
                 <tr>
                   <th scope="col" className="px-6 py-4 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider w-1/4">
-                    Функция
+                    {t.comparison.feature}
                   </th>
                   <th scope="col" className="px-6 py-4 text-center text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider w-1/4">
                     <span className="inline-block px-3 py-1 rounded-full bg-primary/10 dark:bg-primary/20 text-primary dark:text-primary-light">
-                      Наша система
+                      {t.comparison.our_system}
                     </span>
                   </th>
                   <th scope="col" className="px-6 py-4 text-center text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider w-1/4">
-                    Конкурент 1
+                    {t.comparison.competitor_1}
                   </th>
-                  <th scope="col" className="px-6 py-4 text-center text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider w-1/4">
-                    Конкурент 2
-                  </th>
+                  {/*<th scope="col" className="px-6 py-4 text-center text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider w-1/4">*/}
+                  {/*  Конкурент 2*/}
+                  {/*</th>*/}
                 </tr>
               </thead>
               <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
                 {comparisonFeatures.map((feature, index) => (
                   <React.Fragment key={index}>
                     <motion.tr 
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+                      // initial={{ opacity: 0, x: -20 }}
+                      // animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
                       transition={{ duration: 0.5, delay: index * 0.1 + 0.9 }}
                       className={expandedFeature === index ? 'bg-gray-50 dark:bg-gray-700/30' : ''}
                     >
@@ -215,7 +152,7 @@ export const ComparisonSection = () => {
                         </button>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-center">
-                        {feature.ourSystem.available ? (
+                        {feature.oursystem.available ? (
                           <span className="inline-flex items-center p-1.5 rounded-full bg-green-100 dark:bg-green-900/30">
                             <svg className="w-5 h-5 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M5 13l4 4L19 7" />
@@ -244,46 +181,46 @@ export const ComparisonSection = () => {
                           </span>
                         )}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-center">
-                        {feature.competitor2.available ? (
-                          <span className="inline-flex items-center p-1.5 rounded-full bg-green-100 dark:bg-green-900/30">
-                            <svg className="w-5 h-5 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M5 13l4 4L19 7" />
-                            </svg>
-                          </span>
-                        ) : (
-                          <span className="inline-flex items-center p-1.5 rounded-full bg-red-100 dark:bg-red-900/30">
-                            <svg className="w-5 h-5 text-red-600 dark:text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M6 18L18 6M6 6l12 12" />
-                            </svg>
-                          </span>
-                        )}
-                      </td>
+                      {/*<td className="px-6 py-4 whitespace-nowrap text-center">*/}
+                      {/*  {feature.competitor2.available ? (*/}
+                      {/*    <span className="inline-flex items-center p-1.5 rounded-full bg-green-100 dark:bg-green-900/30">*/}
+                      {/*      <svg className="w-5 h-5 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">*/}
+                      {/*        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M5 13l4 4L19 7" />*/}
+                      {/*      </svg>*/}
+                      {/*    </span>*/}
+                      {/*  ) : (*/}
+                      {/*    <span className="inline-flex items-center p-1.5 rounded-full bg-red-100 dark:bg-red-900/30">*/}
+                      {/*      <svg className="w-5 h-5 text-red-600 dark:text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">*/}
+                      {/*        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M6 18L18 6M6 6l12 12" />*/}
+                      {/*      </svg>*/}
+                      {/*    </span>*/}
+                      {/*  )}*/}
+                      {/*</td>*/}
                     </motion.tr>
                     
                     {/* Раскрывающаяся секция с деталями */}
                     {expandedFeature === index && (
                       <motion.tr
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
-                        exit={{ opacity: 0, height: 0 }}
+                        // initial={{ opacity: 0, height: 0 }}
+                        // animate={{ opacity: 1, height: 'auto' }}
+                        // exit={{ opacity: 0, height: 0 }}
                         transition={{ duration: 0.3 }}
                         className="bg-gray-50 dark:bg-gray-700/30"
                       >
                         <td colSpan="4" className="px-6 py-4">
                           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                             <div>
-                              <div className="text-xs font-medium text-primary dark:text-primary-light mb-1">Наша система:</div>
-                              <p className="text-sm text-gray-700 dark:text-gray-300">{feature.ourSystem.details}</p>
+                              <div className="text-xs font-medium text-primary dark:text-primary-light mb-1">{t.comparison.our_system_colon}</div>
+                              <p className="text-sm text-gray-700 dark:text-gray-300">{feature.oursystem.details}</p>
                             </div>
                             <div>
-                              <div className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">Конкурент 1:</div>
+                              <div className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">{t.comparison.competitor_1_colon}</div>
                               <p className="text-sm text-gray-700 dark:text-gray-300">{feature.competitor1.details}</p>
                             </div>
-                            <div>
-                              <div className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">Конкурент 2:</div>
-                              <p className="text-sm text-gray-700 dark:text-gray-300">{feature.competitor2.details}</p>
-                            </div>
+                            {/*<div>*/}
+                            {/*  <div className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">Конкурент 2:</div>*/}
+                            {/*  <p className="text-sm text-gray-700 dark:text-gray-300">{feature.competitor2.details}</p>*/}
+                            {/*</div>*/}
                           </div>
                         </td>
                       </motion.tr>
@@ -298,8 +235,8 @@ export const ComparisonSection = () => {
         {/* Общее сравнение */}
         <motion.div 
           className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8"
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          // initial={{ opacity: 0, y: 30 }}
+          // animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.8, delay: 1.2 }}
         >
           {/* Первая карточка - Преимущества */}
@@ -311,29 +248,22 @@ export const ComparisonSection = () => {
             </div>
             
             <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">
-              Наши преимущества
+              {t.comparison.our_advantages}
             </h3>
             
             <ul className="space-y-3">
-              {[
-                "Полная автоматизация всех процессов",
-                "Интеграция со всеми системами",
-                "Электронный документооборот",
-                "Мобильное приложение для сотрудников",
-                "Открытый API для расширения",
-                "Бесплатная техническая поддержка 24/7"
-              ].map((item, index) => (
+              {ourAdvantages.map((item, index) => (
                 <motion.li
                   key={index}
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -10 }}
+                  // initial={{ opacity: 0, x: -10 }}
+                  // animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -10 }}
                   transition={{ duration: 0.3, delay: index * 0.1 + 1.3 }}
                   className="flex items-start"
                 >
                   <svg className="w-5 h-5 text-green-500 dark:text-green-400 mt-0.5 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                   </svg>
-                  <span className="text-gray-700 dark:text-gray-300 text-sm">{item}</span>
+                  <span className="text-gray-700 dark:text-gray-300 text-sm">{item.text}</span>
                 </motion.li>
               ))}
             </ul>
@@ -348,29 +278,22 @@ export const ComparisonSection = () => {
             </div>
             
             <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">
-              Ограничения конкурентов
+              {t.comparison.competitor_limitations}
             </h3>
             
             <ul className="space-y-3">
-              {[
-                "Отсутствие единой системы",
-                "Ограниченная интеграция",
-                "Платная техническая поддержка",
-                "Нет мобильного приложения",
-                "Ограниченная аналитика",
-                "Высокая стоимость владения"
-              ].map((item, index) => (
+              {otherCompetitors.map((item, index) => (
                 <motion.li
                   key={index}
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -10 }}
+                  // initial={{ opacity: 0, x: -10 }}
+                  // animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -10 }}
                   transition={{ duration: 0.3, delay: index * 0.1 + 1.3 }}
                   className="flex items-start"
                 >
                   <svg className="w-5 h-5 text-red-500 dark:text-red-400 mt-0.5 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
                   </svg>
-                  <span className="text-gray-700 dark:text-gray-300 text-sm">{item}</span>
+                  <span className="text-gray-700 dark:text-gray-300 text-sm">{item.text}</span>
                 </motion.li>
               ))}
             </ul>
@@ -387,7 +310,7 @@ export const ComparisonSection = () => {
               </svg>
               
               <p className="text-white/90 text-lg font-medium italic mb-6">
-                После внедрения системы эффективность наших менеджеров выросла на 42%, а время оформления сделки сократилось с 3 часов до 30 минут. Окупаемость инвестиций составила всего 4 месяца.
+                {t.comparison.testimonial_text}
               </p>
               
               <div className="flex items-center">
@@ -397,8 +320,8 @@ export const ComparisonSection = () => {
                   className="w-10 h-10 rounded-full object-cover border-2 border-white/30 mr-3"
                 />
                 <div>
-                  <h4 className="font-medium text-white">Сергей Владимиров</h4>
-                  <p className="text-white/70 text-sm">Директор, Автосалон "Премиум"</p>
+                  <h4 className="font-medium text-white">{t.comparison.testimonial_author}</h4>
+                  <p className="text-white/70 text-sm">{t.comparison.testimonial_position}</p>
                 </div>
               </div>
             </div>
@@ -408,15 +331,15 @@ export const ComparisonSection = () => {
         {/* CTA-секция */}
         <motion.div 
           className="mt-16 text-center"
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          // initial={{ opacity: 0, y: 30 }}
+          // animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.6, delay: 1.4 }}
         >
           <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
-            Готовы увидеть разницу своими глазами?
+            {t.comparison.see_difference_cta}
           </h3>
           <p className="text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
-            Запросите демонстрацию и сравните нашу систему с текущим решением
+            {t.comparison.demo_request_text}
           </p>
           
           <motion.button
@@ -427,7 +350,7 @@ export const ComparisonSection = () => {
             <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
             </svg>
-            Запросить демонстрацию
+            {t.comparison.demo_button}
           </motion.button>
         </motion.div>
       </div>

@@ -1,15 +1,21 @@
 'use client';
 
-import { useEffect, useRef } from "react";
+import {useEffect, useRef, useState} from "react";
 import {  motion, useAnimation, useInView } from 'framer-motion';
 import { AnimatedCounter } from "./AnimatedCounter.jsx";
 import { CircularIndicator } from "./CircularIndicator";
+import axios from "axios";
+import {useLanguageStore} from "@/src/store/language";
+import {cleanHtmlContent, stripHtmlTags} from "@/src/utils/cleanHtml";
 
 
-export const FeaturesSection = ({ features, title }) => {
+export const FeaturesSection = ({ title }) => {
   const controls = useAnimation();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, threshold: 0.1 });
+  const [features, setFeatures] = useState([]);
+
+  const { currentLocale } = useLanguageStore();
   
   useEffect(() => {
     if (isInView) {
@@ -40,6 +46,63 @@ export const FeaturesSection = ({ features, title }) => {
       }
     }
   };
+
+
+  useEffect(() => {
+    axios
+        .post('/api/get-main-features', { locale: currentLocale })
+        .then((response) => {
+          setFeatures(response.data);
+        })
+        .catch((error) => {
+          console.error('Error fetching stats:', error);
+        });
+  }, [currentLocale]);
+
+
+  // const features = [
+  //   {
+  //     title: 'Inventory management',
+  //     description: 'Complete control over your car fleet with instant access to all vehicles',
+  //     stats: {
+  //       value: 98,
+  //       label: 'of vehicles',
+  //       suffix: '%',
+  //       description: 'available for sale at any time'
+  //     }
+  //   },
+  //   {
+  //     title: 'Sales funnel',
+  //     description: 'Automated process from first contact to closing the deal',
+  //     stats: {
+  //       value: 42,
+  //       label: 'conversion',
+  //       suffix: '%',
+  //       description: 'increase in lead-to-deal conversion'
+  //     }
+  //   },
+  //   {
+  //     title: 'Electronic contracts',
+  //     description: 'Create and sign documents without paperwork',
+  //     stats: {
+  //       value: 85,
+  //       label: 'of contracts',
+  //       suffix: '%',
+  //       description: 'signed online without visiting the dealership'
+  //     }
+  //   },
+  //   {
+  //     title: 'Payment integration',
+  //     description: 'Accept and track payments within a single system',
+  //     stats: {
+  //       value: 3.5,
+  //       label: 'minutes',
+  //       suffix: '',
+  //       description: 'average payment processing time'
+  //     }
+  //   }
+  // ]
+
   
   return (
     <section className="py-16 px-4 overflow-hidden relative" ref={ref}>
@@ -62,9 +125,9 @@ export const FeaturesSection = ({ features, title }) => {
         
         <motion.div 
           className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-12"
-          variants={containerVariants}
-          initial="hidden"
-          animate={controls}
+          // variants={containerVariants}
+          // initial="hidden"
+          // animate={controls}
         >
           {features.map((feature, index) => (
             <motion.div key={index} variants={itemVariants} className="group">
@@ -111,7 +174,7 @@ export const FeaturesSection = ({ features, title }) => {
                 {/* Содержимое карточки */}
                 <div className="p-6">
                   <p className="text-gray-700 dark:text-gray-300 mb-6">
-                    {feature.description}
+                    {stripHtmlTags(feature.description)}
                   </p>
                   
                   {/* Статистика с визуальным индикатором */}
@@ -121,9 +184,9 @@ export const FeaturesSection = ({ features, title }) => {
                       <div className="w-full h-2 bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden mb-2">
                         <motion.div 
                           className="h-full bg-gradient-to-r from-primary to-primary-light"
-                          initial={{ width: 0 }}
-                          whileInView={{ width: `${feature.stats.value <= 100 ? feature.stats.value : 100}%` }}
-                          viewport={{ once: true }}
+                          // initial={{ width: 0 }}
+                          // whileInView={{ width: `${feature.stats.value <= 100 ? feature.stats.value : 100}%` }}
+                          // viewport={{ once: true }}
                           transition={{ duration: 1.5, delay: 0.5 }}
                         ></motion.div>
                       </div>
@@ -134,7 +197,7 @@ export const FeaturesSection = ({ features, title }) => {
                             <AnimatedCounter value={feature.stats.value} suffix={feature.stats.suffix} />
                           </span>
                           <span className="text-base font-medium text-gray-600 dark:text-gray-400">
-                            {feature.stats.label}
+                            {cleanHtmlContent(feature.stats.label)}
                           </span>
                         </div>
                         
@@ -143,7 +206,7 @@ export const FeaturesSection = ({ features, title }) => {
                       </div>
                       
                       <p className="text-sm text-gray-600 dark:text-gray-400 mt-3 italic">
-                        {feature.stats.description}
+                        {cleanHtmlContent(feature.stats.description)}
                       </p>
                     </div>
                   </div>

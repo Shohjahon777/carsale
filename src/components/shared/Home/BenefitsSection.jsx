@@ -4,12 +4,42 @@ import { useEffect, useRef, useState } from "react";
 import {  motion } from 'framer-motion';
 import * as d3 from 'd3';
 import { AnimatedCounter } from "./AnimatedCounter.jsx";
+import {useLanguageStore} from "@/src/store/language";
+import axios from "axios";
+import {pageLocalization} from "@/src/components/shared/Home/localization";
+import {cleanHtmlContent} from "@/src/utils/cleanHtml";
 
-export const BenefitsSection = ({ benefits }) => {
+export const BenefitsSection = () => {
   const graphRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
   const [activeIndex, setActiveIndex] = useState(null);
   const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1200);
+  const [items, setItems] = useState([]);
+
+
+  const {currentLocale} = useLanguageStore()
+
+  const t = pageLocalization[currentLocale] || pageLocalization.ru;
+
+
+
+  const fetchBenefits = async () => {
+    try {
+      const response = await axios.post('/api/get-main-benefits', {locale: currentLocale});
+      if (response.status !== 200) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      setItems(response.data);
+    } catch (error) {
+      console.error('Error fetching testimonials:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchBenefits()
+  }, [currentLocale]);
+
+
   
   useEffect(() => {
     const handleResize = () => {
@@ -66,10 +96,10 @@ export const BenefitsSection = ({ benefits }) => {
       .attr("transform", `translate(${margin.left},${margin.top})`);
     
     // Извлекаем числовые значения из данных
-    const data = benefits.items.map(item => ({
-      label: item.label,
+    const data = items.map(item => ({
+      label: cleanHtmlContent(item.label),
       value: parseInt(item.value, 10) || 0
-    }));
+    })); 
     
     // Создаем шкалы
     const xScale = d3.scaleBand()
@@ -198,7 +228,7 @@ export const BenefitsSection = ({ benefits }) => {
       .delay((d, i) => i * 200 + 500)
       .style("opacity", 1);
     
-  }, [isVisible, benefits.items, windowWidth]);
+  }, [isVisible, items, windowWidth]);
   
   return (
     <section className="py-16 px-4 bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-800/80">
@@ -211,11 +241,11 @@ export const BenefitsSection = ({ benefits }) => {
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-            {benefits.title}
+            {t.benefits.title}
           </h2>
           <div className="w-20 h-1 bg-primary mx-auto rounded-full"></div>
           <p className="mt-4 text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            Наши решения существенно улучшают эффективность и результативность бизнеса
+            {t.benefits.sub_title}
           </p>
         </motion.div>
         
@@ -233,22 +263,22 @@ export const BenefitsSection = ({ benefits }) => {
               style={{
                 top: '10%',
                 left: windowWidth >= 768 
-                  ? `${10 + (activeIndex * (100 / benefits.items.length))}%` 
+                  ? `${10 + (activeIndex * (100 / items.length))}%`
                   : '50%',
                 transform: windowWidth >= 768 
                   ? 'translateX(-50%)' 
                   : 'translate(-50%, -50%)',
               }}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 10 }}
+              // initial={{ opacity: 0, y: 10 }}
+              // animate={{ opacity: 1, y: 0 }}
+              // exit={{ opacity: 0, y: 10 }}
               transition={{ duration: 0.2 }}
             >
               <h4 className="font-bold text-primary dark:text-primary-light text-lg mb-1">
-                {benefits.items[activeIndex].value}
+                {items[activeIndex].value}
               </h4>
               <p className="text-gray-700 dark:text-gray-300">
-                {benefits.items[activeIndex].label}
+                {cleanHtmlContent(items[activeIndex].label)}
               </p>
               <div className="absolute w-3 h-3 bg-white dark:bg-gray-800 rotate-45 bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/3 border-r border-b border-gray-100 dark:border-gray-700"></div>
             </motion.div>
@@ -258,18 +288,18 @@ export const BenefitsSection = ({ benefits }) => {
         {/* Адаптивные карточки преимуществ */}
         <motion.div 
           className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
+          // initial={{ opacity: 0 }}
+          // whileInView={{ opacity: 1 }}
+          // viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.3 }}
         >
-          {benefits.items.map((item, index) => (
+          {items.map((item, index) => (
             <motion.div 
               key={index}
               className="relative overflow-hidden bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-xl shadow-md border border-gray-100 dark:border-gray-700 group"
-              initial={{ scale: 0.9, opacity: 0 }}
-              whileInView={{ scale: 1, opacity: 1 }}
-              viewport={{ once: true }}
+              // initial={{ scale: 0.9, opacity: 0 }}
+              // whileInView={{ scale: 1, opacity: 1 }}
+              // viewport={{ once: true }}
               transition={{ duration: 0.4, delay: index * 0.1 + 0.2 }}
               whileHover={{ 
                 y: -5, 
@@ -285,7 +315,7 @@ export const BenefitsSection = ({ benefits }) => {
                   <AnimatedCounter value={parseInt(item.value, 10) || 0} suffix="%" duration={1200} />
                 </div>
                 <div className="text-sm sm:text-base text-gray-600 dark:text-gray-400 font-medium">
-                  {item.label}
+                  {cleanHtmlContent(item.label)}
                 </div>
                 
                 {/* Прогресс-бар */}

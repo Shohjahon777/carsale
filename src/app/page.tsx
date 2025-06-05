@@ -200,19 +200,29 @@ export default function Home() {
       </section>
       
       {/* Статистика компании */}
-      <StatsSection />
+      <StatsSection
+          sup_title={t.stats.supTitle}
+          sub_title={t.stats.subTitle}
+          title={t.stats.title}
+          down_title={t.stats.trusted}
+          dealer={t.stats.dealer}
+      />
       
       {/* Основные возможности */}
       <FeaturesSection
-        features={t.features.list} 
         title={t.features.title}
       />
       
       {/* Для кого это */}
-      <TargetAudienceSection />
+      <TargetAudienceSection
+        solution={t.audiences.solution}
+        whom={t.audiences.whom}
+        title={t.audiences.title}
+        audiences={t.audiences.list}
+      />
       
       {/* Преимущества */}
-      <BenefitsSection benefits={t.benefits} />
+      <BenefitsSection />
       
       {/* Сравнение с конкурентами */}
       <ComparisonSection />

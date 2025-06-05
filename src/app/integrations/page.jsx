@@ -497,10 +497,418 @@ const localization = {
     }
   },
   en: {
-    // Английская локализация (аналогично русской)
+    hero: {
+      title: 'Car-Sale Integrations',
+      subtitle: 'Unifying your auto business into a single ecosystem',
+      description: 'Car-Sale offers flexible integration options with popular services and government systems to build a unified digital environment for the automotive business.'
+    },
+    categories: {
+      all: 'All Integrations',
+      government: 'Government Services',
+      banks: 'Banks & Payments',
+      crm: 'CRM & Marketing',
+      marketplaces: 'Marketplaces',
+      messengers: 'Messengers',
+      api: 'API & Developers'
+    },
+    tabs: {
+      ready: 'Ready Integrations',
+      custom: 'Custom Solutions',
+      api: 'API for Developers'
+    },
+    integrations: [
+      {
+        id: 'oneid',
+        name: 'OneID / ESIA',
+        category: 'government',
+        icon: '/icons/oneid.svg',
+        imagePlaceholder: 'https://via.placeholder.com/80x80/e2e8f0/475569?text=OneID',
+        description: 'Integration with the citizen digital identification system for quick customer verification and auto-filled document data.',
+        features: [
+          'Automatic client data entry',
+          'Customer identity verification',
+          'Electronic document signing',
+          'Legally binding transactions'
+        ],
+        benefits: [
+          'Reduce document processing time by 70%',
+          'Eliminate data entry errors',
+          'Increase transaction security',
+          'Comply with legal requirements'
+        ],
+        implementation: 'Integration with OneID is done via the official API. Pre-registration and access approval are required.',
+        status: 'ready',
+        docsUrl: 'https://docs.example.com/oneid-integration'
+      },
+      {
+        id: 'emib',
+        name: 'E-MIB / Tax Authority',
+        category: 'government',
+        icon: '/icons/emib.svg',
+        imagePlaceholder: 'https://via.placeholder.com/80x80/e2e8f0/475569?text=E-MIB',
+        description: 'Interaction with the electronic system of the State Tax Service to automate tax reporting and accounting during car sales.',
+        features: [
+          'Automatic tax and fee calculation',
+          'Electronic declaration submission',
+          'Obtaining certificates and extracts',
+          'VAT accounting for transactions'
+        ],
+        benefits: [
+          'Compliance with tax regulations',
+          'Minimize fines and penalties',
+          'Reduce administrative burden',
+          'Speed up vehicle registration'
+        ],
+        implementation: 'Connecting to E-MIB requires an electronic signature and registration in the taxpayer’s portal. Car-Sale provides secure data exchange.',
+        status: 'ready',
+        docsUrl: 'https://docs.example.com/emib-integration'
+      },
+      {
+        id: 'sberbank',
+        name: 'Sberbank',
+        category: 'banks',
+        icon: '/icons/sberbank.svg',
+        imagePlaceholder: 'https://via.placeholder.com/80x80/e2e8f0/475569?text=Sberbank',
+        description: 'Integration with Russia’s largest bank for automating credit, leasing, and payment processes during car purchases.',
+        features: [
+          'Online auto loan applications',
+          'Acquiring integration',
+          'Automatic borrower verification',
+          'Installment schedule calculation'
+        ],
+        benefits: [
+          '25% increase in approved applications',
+          'Loan approval in 30 minutes',
+          'Automatic payment tracking',
+          'Reduced workload for managers'
+        ],
+        implementation: 'Sberbank integration uses a secure API and requires a contract with the bank and access to the partner portal.',
+        status: 'ready',
+        docsUrl: 'https://docs.example.com/sberbank-integration'
+      },
+      {
+        id: 'tinkoff',
+        name: 'Tinkoff',
+        category: 'banks',
+        icon: '/icons/tinkoff.svg',
+        imagePlaceholder: 'https://via.placeholder.com/80x80/e2e8f0/475569?text=Tinkoff',
+        description: 'A full-featured solution for working with Tinkoff Bank, including credit, acquiring, and online payments on the dealer’s website.',
+        features: [
+          'Instant credit decisions',
+          'Online acquiring for websites',
+          'QR code payments',
+          'API integration with bank services'
+        ],
+        benefits: [
+          'Up to 80% conversion rate in issued loans',
+          'Acquiring fees from 1.2%',
+          'Instant funds transfer',
+          'Automated payment reconciliation'
+        ],
+        implementation: 'Tinkoff integration is configured through the business portal. Car-Sale provides ready connectors for all bank services.',
+        status: 'ready',
+        docsUrl: 'https://docs.example.com/tinkoff-integration'
+      },
+      {
+        id: 'bitrix24',
+        name: 'Bitrix24',
+        category: 'crm',
+        icon: '/icons/bitrix24.svg',
+        imagePlaceholder: 'https://via.placeholder.com/80x80/e2e8f0/475569?text=Bitrix24',
+        description: 'Two-way data sync between Car-Sale and Bitrix24 for auto dealers using both systems.',
+        features: [
+          'Customer database sync',
+          'Deal data exchange',
+          'Business process integration',
+          'Automatic task creation'
+        ],
+        benefits: [
+          'No data duplication',
+          'Comprehensive sales analytics',
+          'Unified info for all departments',
+          'Improved marketing efficiency'
+        ],
+        implementation: 'Integration with Bitrix24 is done via API. Car-Sale offers a ready-made solution requiring minimal setup.',
+        status: 'ready',
+        docsUrl: 'https://docs.example.com/bitrix24-integration'
+      },
+      {
+        id: 'amocrm',
+        name: 'AmoCRM',
+        category: 'crm',
+        icon: '/icons/amocrm.svg',
+        imagePlaceholder: 'https://via.placeholder.com/80x80/e2e8f0/475569?text=AmoCRM',
+        description: 'Integration with the popular CRM system to sync customers, deals, and sales pipeline between Car-Sale and AmoCRM.',
+        features: [
+          'Two-way contact synchronization',
+          'Deal information exchange',
+          'Integration with Digital Pipeline',
+          'Sales funnel automation'
+        ],
+        benefits: [
+          'Unified customer database',
+          'Automatic deal status updates',
+          '30% increase in sales efficiency',
+          'Better manager performance tracking'
+        ],
+        implementation: 'Connection to AmoCRM is via OAuth 2.0. Car-Sale provides a widget available in the AmoCRM marketplace.',
+        status: 'ready',
+        docsUrl: 'https://docs.example.com/amocrm-integration'
+      },
+      {
+        id: 'avito',
+        name: 'Avito',
+        category: 'marketplaces',
+        icon: '/icons/avito.svg',
+        imagePlaceholder: 'https://via.placeholder.com/80x80/e2e8f0/475569?text=Avito',
+        description: 'Automatic posting of car listings from Car-Sale to Avito with status sync and request handling.',
+        features: [
+          'Automatic listing uploads',
+          'Stock synchronization',
+          'Lead processing from Avito',
+          'View statistics retrieval'
+        ],
+        benefits: [
+          'Time-saving on ad placement',
+          'Error and duplication avoidance',
+          'Wider customer reach',
+          'Centralized platform management'
+        ],
+        implementation: 'Avito integration uses the official API. A business account and API key are required.',
+        status: 'ready',
+        docsUrl: 'https://docs.example.com/avito-integration'
+      },
+      {
+        id: 'auto-ru',
+        name: 'Auto.ru',
+        category: 'marketplaces',
+        icon: '/icons/auto-ru.svg',
+        imagePlaceholder: 'https://via.placeholder.com/80x80/e2e8f0/475569?text=Auto.ru',
+        description: 'Integration with Russia’s largest car marketplace for automatic ad posting and lead management.',
+        features: [
+          'Automatic car uploads',
+          'Real-time stock updates',
+          'Customer message processing',
+          'Placement performance analytics'
+        ],
+        benefits: [
+          '35% increase in sales',
+          'Reduced ad publishing time',
+          'Automatic price updates',
+          'Central catalog management'
+        ],
+        implementation: 'Auto.ru connection requires a contract and access to the dealer API. Car-Sale provides a fully configured solution.',
+        status: 'ready',
+        docsUrl: 'https://docs.example.com/auto-ru-integration'
+      }
+    ]
   },
   uz: {
-    // Узбекская локализация (аналогично русской)
+    hero: {
+      title: 'Car-Sale Integratsiyalari',
+      subtitle: 'Avtomobil biznesingizni yagona ekotizimga birlashtiramiz',
+      description: 'Car-Sale mashhur xizmatlar va davlat tizimlari bilan moslashuvchan integratsiya imkoniyatlarini taklif etadi, bu avtomobil biznesi uchun yagona raqamli muhit yaratadi.'
+    },
+    categories: {
+      all: 'Barcha integratsiyalar',
+      government: 'Davlat xizmatlari',
+      banks: 'Banklar va toʻlovlar',
+      crm: 'CRM va Marketing',
+      marketplaces: 'Marketplace platformalari',
+      messengers: 'Messengerlar',
+      api: 'API va Dasturchilar'
+    },
+    tabs: {
+      ready: 'Tayyor integratsiyalar',
+      custom: 'Maxsus yechimlar',
+      api: 'Dasturchilar uchun API'
+    },
+    integrations: [
+      {
+        id: 'oneid',
+        name: 'OneID / ESIA',
+        category: 'government',
+        icon: '/icons/oneid.svg',
+        imagePlaceholder: 'https://via.placeholder.com/80x80/e2e8f0/475569?text=OneID',
+        description: 'Mijozni tezkor identifikatsiya qilish va hujjat maʼlumotlarini avtomatik toʻldirish uchun fuqarolarning raqamli identifikatsiyasi tizimi bilan integratsiya.',
+        features: [
+          'Mijoz maʼlumotlarini avtomatik kiritish',
+          'Shaxsni tasdiqlash',
+          'Elektron hujjatlarni imzolash',
+          'Yuridik ahamiyatga ega bitimlar'
+        ],
+        benefits: [
+          'Hujjat aylanish vaqtini 70% ga qisqartiring',
+          'Maʼlumot kiritishdagi xatolarni yoʻq qiling',
+          'Bitim xavfsizligini oshiring',
+          'Yuridik talablar bilan muvofiqlik'
+        ],
+        implementation: 'OneID bilan integratsiya rasmiy API orqali amalga oshiriladi. Oldindan roʻyxatdan oʻtish va ruxsat olish talab etiladi.',
+        status: 'ready',
+        docsUrl: 'https://docs.example.com/oneid-integration'
+      },
+      {
+        id: 'emib',
+        name: 'E-MIB / Soliq Qoʻmitasi',
+        category: 'government',
+        icon: '/icons/emib.svg',
+        imagePlaceholder: 'https://via.placeholder.com/80x80/e2e8f0/475569?text=E-MIB',
+        description: 'Avtomobil savdosida soliq hisobotlari va buxgalteriya hisobi jarayonlarini avtomatlashtirish uchun Davlat soliq qoʻmitasining elektron tizimi bilan oʻzaro aloqa.',
+        features: [
+          'Soliq va toʻlovlarni avtomatik hisoblash',
+          'Elektron deklaratsiya yuborish',
+          'Guvohnoma va maʼlumotnomalarni olish',
+          'Bitimlar uchun QQS hisoboti'
+        ],
+        benefits: [
+          'Soliq qonunchiligiga muvofiqlik',
+          'Jarima va penya xavfini kamaytirish',
+          'Maʼmuriy yukni kamaytirish',
+          'Avtomobilni tezroq roʻyxatdan oʻtkazish'
+        ],
+        implementation: 'E-MIB tizimiga ulanish uchun elektron raqamli imzo va soliq toʻlovchi portali orqali roʻyxatdan oʻtish zarur. Car-Sale xavfsiz maʼlumot almashuvini taʼminlaydi.',
+        status: 'ready',
+        docsUrl: 'https://docs.example.com/emib-integration'
+      },
+      {
+        id: 'sberbank',
+        name: 'Sberbank',
+        category: 'banks',
+        icon: '/icons/sberbank.svg',
+        imagePlaceholder: 'https://via.placeholder.com/80x80/e2e8f0/475569?text=Sberbank',
+        description: 'Avtomobil xaridi jarayonida kreditlash, lizing va toʻlovlarni avtomatlashtirish uchun Rossiyaning yirik banki bilan integratsiya.',
+        features: [
+          'Onlayn avtomobil kredit arizalari',
+          'Eksayring integratsiyasi',
+          'Mijozni avtomatik tekshirish',
+          'Boʻlib toʻlash jadvalini hisoblash'
+        ],
+        benefits: [
+          'Tasdiqlangan arizalar soni 25% ga oshadi',
+          'Kredit tasdigʻi 30 daqiqada',
+          'Toʻlovlarni avtomatik kuzatish',
+          'Menejerlar yuklamasini kamaytirish'
+        ],
+        implementation: 'Sberbank integratsiyasi xavfsiz API orqali amalga oshiriladi va bank bilan shartnoma tuzish, hamda hamkorlik portaliga kirish talab etiladi.',
+        status: 'ready',
+        docsUrl: 'https://docs.example.com/sberbank-integration'
+      },
+      {
+        id: 'tinkoff',
+        name: 'Tinkoff',
+        category: 'banks',
+        icon: '/icons/tinkoff.svg',
+        imagePlaceholder: 'https://via.placeholder.com/80x80/e2e8f0/475569?text=Tinkoff',
+        description: 'Tinkoff Bank bilan toʻliq integratsiya yechimi: kredit, ekvayring va diler saytida onlayn toʻlovlar.',
+        features: [
+          'Kredit qarorlarini darhol qabul qilish',
+          'Sayt uchun onlayn ekvayring',
+          'QR-kod orqali toʻlov',
+          'Bank xizmatlari bilan API integratsiya'
+        ],
+        benefits: [
+          'Berilgan kreditlar boʻyicha konversiya 80% gacha',
+          'Eksayring komissiyasi 1.2% dan',
+          'Pul mablagʻlarini tezkor oʻtkazish',
+          'Avtomatlashtirilgan toʻlov muvofiqlashtirish'
+        ],
+        implementation: 'Tinkoff integratsiyasi biznes portali orqali sozlanadi. Car-Sale bank xizmatlari uchun tayyor konnektorlarni taqdim etadi.',
+        status: 'ready',
+        docsUrl: 'https://docs.example.com/tinkoff-integration'
+      },
+      {
+        id: 'bitrix24',
+        name: 'Bitrix24',
+        category: 'crm',
+        icon: '/icons/bitrix24.svg',
+        imagePlaceholder: 'https://via.placeholder.com/80x80/e2e8f0/475569?text=Bitrix24',
+        description: 'Car-Sale va Bitrix24 tizimlari oʻrtasida ikki tomonlama maʼlumot sinxronizatsiyasi, avtosalonlar uchun.',
+        features: [
+          'Mijozlar bazasini sinxronizatsiya qilish',
+          'Bitim maʼlumotlarini almashish',
+          'Biznes jarayonlarni birlashtirish',
+          'Vazifalarni avtomatik yaratish'
+        ],
+        benefits: [
+          'Maʼlumotlarni dublikatlashdan xalos boʻling',
+          'Yagona savdo tahlili',
+          'Boʻlimlar uchun yagona maʼlumot bazasi',
+          'Marketing samaradorligini oshiring'
+        ],
+        implementation: 'Bitrix24 bilan integratsiya API orqali amalga oshiriladi. Car-Sale minimal sozlamalarni talab qiladigan tayyor yechimni taklif etadi.',
+        status: 'ready',
+        docsUrl: 'https://docs.example.com/bitrix24-integration'
+      },
+      {
+        id: 'amocrm',
+        name: 'AmoCRM',
+        category: 'crm',
+        icon: '/icons/amocrm.svg',
+        imagePlaceholder: 'https://via.placeholder.com/80x80/e2e8f0/475569?text=AmoCRM',
+        description: 'Car-Sale va AmoCRM oʻrtasida mijozlar, bitimlar va savdo kanali sinxronizatsiyasi uchun mashhur CRM tizimi bilan integratsiya.',
+        features: [
+          'Kontaktlarni ikki tomonlama sinxronlash',
+          'Bitim maʼlumotlarini almashish',
+          'Digital Pipeline bilan integratsiya',
+          'Savdo hunisini avtomatlashtirish'
+        ],
+        benefits: [
+          'Yagona mijozlar bazasi',
+          'Bitim holatini avtomatik yangilash',
+          'Savdo samaradorligi 30% ga oshadi',
+          'Menejer ish faoliyatini kuzatish'
+        ],
+        implementation: 'AmoCRM bilan ulanish OAuth 2.0 orqali amalga oshiriladi. Car-Sale CRM marketida mavjud bo‘lgan vidjetni taqdim etadi.',
+        status: 'ready',
+        docsUrl: 'https://docs.example.com/amocrm-integration'
+      },
+      {
+        id: 'avito',
+        name: 'Avito',
+        category: 'marketplaces',
+        icon: '/icons/avito.svg',
+        imagePlaceholder: 'https://via.placeholder.com/80x80/e2e8f0/475569?text=Avito',
+        description: 'Car-Sale’dan Avito platformasiga avtomatik eʼlon joylash va holat sinxronizatsiyasi, shuningdek soʻrovlarni qayta ishlash.',
+        features: [
+          'Eʼlonlarni avtomatik yuklash',
+          'Ombor holatini sinxronlashtirish',
+          'Avito’dan leadlarni qayta ishlash',
+          'Koʻrish statistikalarini olish'
+        ],
+        benefits: [
+          'Reklama joylash vaqtini tejash',
+          'Xatoliklar va dublikatlardan saqlanish',
+          'Koʻproq mijozlar qamrovi',
+          'Barcha platformalarni yagona boshqaruv'
+        ],
+        implementation: 'Avito integratsiyasi rasmiy API orqali ishlaydi. Biznes akkaunt va API kaliti talab qilinadi.',
+        status: 'ready',
+        docsUrl: 'https://docs.example.com/avito-integration'
+      },
+      {
+        id: 'auto-ru',
+        name: 'Auto.ru',
+        category: 'marketplaces',
+        icon: '/icons/auto-ru.svg',
+        imagePlaceholder: 'https://via.placeholder.com/80x80/e2e8f0/475569?text=Auto.ru',
+        description: 'Rossiyadagi eng yirik avtomobil bozori bilan integratsiya, eʼlonlarni avtomatik joylashtirish va leadlarni boshqarish.',
+        features: [
+          'Avtomobillarni avtomatik yuklash',
+          'Real vaqt ombor yangilanishi',
+          'Mijoz xabarlarini qayta ishlash',
+          'Joylashtirish tahlilini olish'
+        ],
+        benefits: [
+          'Savdolarni 35% ga oshiring',
+          'Eʼlon joylashtirish vaqtini qisqartiring',
+          'Narxlarni avtomatik yangilash',
+          'Markazlashgan katalog boshqaruvi'
+        ],
+        implementation: 'Auto.ru bilan ulanish uchun diler API va shartnoma talab etiladi. Car-Sale toʻliq sozlangan yechimni taqdim etadi.',
+        status: 'ready',
+        docsUrl: 'https://docs.example.com/auto-ru-integration'
+      }
+    ]
   }
 };
 
