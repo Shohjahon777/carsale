@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion';
  * Компонент улучшенного базового лоадера без лишних деталей
  */
 export default function ContentReadyLoader() {
-  const pathname = usePathname();
+  const pathname = usePathname() ?? '';
   const [isLoading, setIsLoading] = useState(true);
   
   useEffect(() => {
